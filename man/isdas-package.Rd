@@ -4,7 +4,7 @@
 \name{isdas-package}
 \alias{isdas}
 \alias{isdas-package}
-\title{isdas: What the Package Does (One Line, Title Case)}
+\title{isdas: Companion Package for Book An Introduction to Spatial Data Analysis and Statistics}
 \description{
 What the package does (one paragraph).
 }
@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Antonio Páez \email{paezha@mcmaster.ca} (\href{https://orcid.org/0000-0001-6912-9919}{ORCID})
 
 }
 \keyword{internal}
