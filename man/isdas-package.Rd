@@ -6,7 +6,7 @@
 \alias{isdas-package}
 \title{isdas: Companion Package for Book An Introduction to Spatial Data Analysis and Statistics}
 \description{
-What the package does (one paragraph).
+This package contains data sets, custom functions, and document templates to work with the book An Introduction to Spatial Data Analysis and Statistics: A Course in R.
 }
 \seealso{
 Useful links:
@@ -19,6 +19,12 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Antonio Páez \email{paezha@mcmaster.ca} (\href{https://orcid.org/0000-0001-6912-9919}{ORCID})
+
+Authors:
+\itemize{
+  \item Rajveer Ubhi \email{ubhir@mcmaster.ca}
+  \item Anastassios Dardas
+}
 
 }
 \keyword{internal}
