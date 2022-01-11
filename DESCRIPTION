@@ -4,7 +4,7 @@ Version: 0.0.0.0100
 Authors@R: 
     c(person("Antonio", "Páez", , "paezha@mcmaster.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6912-9919")),
-           person("Rajveer", "Ubhi", , "ubhir@mcmaster.ca", role = c("aut")),
+           person("Rajveer", "Ubhi", , "ubhir20@gmail.com", role = c("aut")),
            person("Anastassios", "Dardas", , "", role = c("aut")))
 Description: This package contains data sets, custom functions, and document templates to work with the book An Introduction to Spatial Data Analysis and Statistics: A Course in R.
 License: MIT + file LICENSE

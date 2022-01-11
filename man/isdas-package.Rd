@@ -22,7 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Rajveer Ubhi \email{ubhir@mcmaster.ca}
+  \item Rajveer Ubhi \email{ubhir20@gmail.com}
   \item Anastassios Dardas
 }
 
