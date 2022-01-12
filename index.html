@@ -61,7 +61,8 @@
 <div class="page-header"><h1 id="isdas">isdas<a class="anchor" aria-label="anchor" href="#isdas"></a>
 </h1></div>
 <!-- badges: start -->
-
+<!-- Institutional logo: save in folder `images` -->
+<p><img src="reference/figures/isdas.png" align="right" width="300"><!-- badges: end --></p>
 <p>Package {isdas} is a companion package to the book An Introduction to <a href="https://paezha.github.io/spatial-analysis-r/" class="external-link">Spatial Data Analysis and Statistics: A Course in R</a>. As an open educational resource, it aims to combine various advantages of working with the <a href="https://www.r-project.org/" class="external-link"><code>R</code> statistical computing project</a>:</p>
 <ul>
 <li>Ease of distribution</li>
@@ -110,13 +111,14 @@
 <div class="section level2">
 <h2 id="quick-start-guide">Quick Start Guide<a class="anchor" aria-label="anchor" href="#quick-start-guide"></a>
 </h2>
-<p>Once you have installed <code>R</code> and RStudio you are ready to install the course package {envsocty3LT3}. The package is available from <a href="https://github.com/paezha/envsocty3LT3" class="external-link">GitHub</a>, and to install it you need to run the following code in your <code>R</code> console:</p>
+<p>Once you have installed <code>R</code> and RStudio you are ready to install the course package {isdas}. The package is available from <a href="https://github.com/paezha/isdas" class="external-link">GitHub</a>, and to install it you need to run the following code in your <code>R</code> console:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"paezha/envsocty3LT3"</span><span class="op">)</span></code></pre></div>
-<p>This will download the package to your personal library of packages and install it to make the package available for use locally. Behind the scenes, {envsocty3LT3} uses LaTeX to convert documents to PDF. For this you need to have install LaTeX in your system. The simplest approach on any platform is with <code>R</code> package <a href="https://yihui.name/tinytex/" class="external-link">tinytex</a>, as follows:</p>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"paezha/isdas"</span><span class="op">)</span></code></pre></div>
+<p>This will download the package to your personal library of packages and install it to make the package available for use locally. Behind the scenes, {isdas} uses LaTeX to convert documents to PDF. For this you need to have install LaTeX in your system. The simplest approach on any platform is with <code>R</code> package <a href="https://yihui.name/tinytex/" class="external-link">tinytex</a>, as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'tinytex'</span>, <span class="st">'rmarkdown'</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'tinytex'</span>,
+                   <span class="st">'rmarkdown'</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html" class="external-link">install_tinytex</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>After restarting R Studio, confirm that you have LaTeX with the following command:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -195,13 +197,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://CRAN.R-project.org/package=envsocty3LT3" class="external-link"><img src="https://www.r-pkg.org/badges/version/envsocty3LT3" alt="CRAN status"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>
