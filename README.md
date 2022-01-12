@@ -4,12 +4,8 @@
 # isdas
 
 <!-- badges: start -->
-
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/envsocty3LT3)](https://CRAN.R-project.org/package=envsocty3LT3)
 <!-- Institutional logo: save in folder `images` -->
+
 <img src="man/figures/isdas.png" align="right" width=300 />
 <!-- badges: end -->
 
@@ -146,24 +142,25 @@ and it is in this pane where this kind of content can be previewed.
 ## Quick Start Guide
 
 Once you have installed `R` and RStudio you are ready to install the
-course package {envsocty3LT3}. The package is available from
-[GitHub](https://github.com/paezha/envsocty3LT3), and to install it you
-need to run the following code in your `R` console:
+course package {isdas}. The package is available from
+[GitHub](https://github.com/paezha/isdas), and to install it you need to
+run the following code in your `R` console:
 
 ``` r
 install.packages("remotes")
-remotes::install_github("paezha/envsocty3LT3")
+remotes::install_github("paezha/isdas")
 ```
 
 This will download the package to your personal library of packages and
 install it to make the package available for use locally. Behind the
-scenes, {envsocty3LT3} uses LaTeX to convert documents to PDF. For this
-you need to have install LaTeX in your system. The simplest approach on
-any platform is with `R` package [tinytex](https://yihui.name/tinytex/),
-as follows:
+scenes, {isdas} uses LaTeX to convert documents to PDF. For this you
+need to have install LaTeX in your system. The simplest approach on any
+platform is with `R` package [tinytex](https://yihui.name/tinytex/), as
+follows:
 
 ``` r
-install.packages(c('tinytex', 'rmarkdown'))
+install.packages(c('tinytex',
+                   'rmarkdown'))
 tinytex::install_tinytex()
 ```
 
