@@ -97,8 +97,8 @@ how to install these application.
 
 If you are working in the GIS lab at McMaster you will find that these
 have already been installed there. If you have used `R` and have a
-previous instal, update it to `R` version 4.1.1 (2021-08-10) – “Kick
-Things”. **The course package was developed using “Kick Things”!**
+previous instal, update it to `R` version 4.1.2 (2021-11-01) – “Bird
+Hippie”. **This package was developed using “Bird Hippie”!**
 
 ### RStudio window: A Quick Tour
 

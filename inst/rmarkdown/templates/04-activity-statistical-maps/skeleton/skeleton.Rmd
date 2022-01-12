@@ -57,12 +57,6 @@ In the practice that preceded this activity, you used `ggmap` to create a propor
 
 In this activity, we will map another type of spatial data, called _areal data_. Areas are often administrative or political jurisdictions.
 
-For this activity you will need the following:
-
-* An R markdown notebook version of this document (the source file).
-
-* A package called `isdas`.
-
 It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
 ```{r ch05-}
 rm(list = ls())

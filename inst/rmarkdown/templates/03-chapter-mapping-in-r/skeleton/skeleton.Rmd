@@ -34,12 +34,6 @@ Such is the case of the `R` statistical computing language. `R` has been adopted
 
 The objective of this note is to provide an introduction to mapping in `R`. Maps are one of the fundamental tools of spatial statistics and spatial analysis, and `R` allows for many GIS-like functions.
 
-If you wish to work interactively with this chapter you will need the following:
-
-* An R markdown notebook version of this document (the source file).
-
-* A package called `isdas`.
-
 In the previous reading/practice you created a simple proportional symbols map. In this reading/practice you will learn how to create more sophisticated maps in `R`.
 
 ## Learning Objectives

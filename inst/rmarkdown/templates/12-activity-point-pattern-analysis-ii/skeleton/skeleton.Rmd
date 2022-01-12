@@ -1,0 +1,123 @@
+---
+title: "12 Activity: Point Pattern Analysis II"
+author:
+  # Enter your name and student number here:
+- name: My Name
+  student_number: 123456789
+subject: "Course Code and Name"
+
+# The next two sections are for your own benefit. In the highlights you can briefly reflect about your learning experience while working on this activity. After completing the questions in the activity, use this space to write your thoughts about your learning experience. What did you learn working on this assignment? How were you challenged? Was it easy? What did you do that worked? What would you do differently? You can use more than one paragraph but remember to indent the paragraphs. This summary does not need to be very long, try to write it in about 200 words.
+highlights: |
+    This is my mini-reflection. Paragraphs must be indented.
+    
+    It can contain multiple paragraphs.
+    
+# Write the concepts that in your opinion are threshold concepts in this exercise. A threshold concept is a key idea that once you grasp it, it changes your understanding of a topic, phenomenon, subject, method, etc. Write between three and five threshold concepts that apply to your learning experience working on this exercise.
+threshold_concepts: 
+- threshold concept 1
+- threshold concept 2 
+- threshold concept 3
+- threshold concept 4
+
+# Do not edit below this line unless you know what you are doing
+# --------------------------------------------------------------
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  pdf_document:
+    # The project-template-default.tex file was heavily  adapted from Steven V. Miller's template for academic manuscripts. See:
+    # http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/
+    # https://github.com/svmiller/svm-r-markdown-templates/blob/master/svm-latex-ms.tex
+    template: exercise-template-default.tex
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Practice questions
+
+Answer the following questions:
+
+1. How does the quadrat-based test of independence respond to a small number of quadrats?
+2. How does the quadrat-based test of independence respond to a large number of quadrats?
+3. What are the limitations of quadrat analysis?
+4. What is a kernel function?
+5. How does the bandwidth affect a kernel function?
+
+## Learning objectives
+
+In this activity, you will:
+
+1. Explore a dataset using quadrats and kernel density.
+2. Experiment with different parameters (number/size of kernels and bandwidths).
+3. Discuss the impacts of selecting different parameters.
+4. Hypothesize about the underlying spatial process based on your analysis.
+
+## Suggested reading
+
+O'Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 5. John Wiley & Sons: New Jersey.
+
+## Preliminaries
+
+It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
+```{r}
+rm(list = ls())
+```
+
+Note that `ls()` lists all objects currently on the worspace.
+
+Load the libraries you will use in this activity. In addition to `tidyverse`, you will need `spatstat`, a package designed for the analysis of point patterns (you can learn about `spatstat` [here](https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf) and [here](http://spatstat.org/resources/spatstatJSSpaper.pdf)):
+```{r message=FALSE, warning=FALSE}
+library(isdas)
+library(spatstat)
+library(tidyverse)
+```
+
+In the practice that preceded this activity, you learned about the concepts of intensity and density, about quadrats, and also how to create density maps. 
+Begin by loading the data that you will use in this activity:
+```{r}
+data("bear_df")
+```
+
+This dataset was sourced from the Scandinavia Bear Project, a Swedish-Noruegian collaboration that aims to study the ecology of brown bears, to provide decision makers with evidence to support bear management, and to provide information regarding bears to the public. You can learn more about this project [here](http://bearproject.info/about-the-project/).
+
+The project involves tagging bears with GPS units, so that their movements can be tracked.
+
+The dataset includes coordinates of one bear's movement over a period of several weeksin 2004. The dataset was originally taken from the `adehabitatLT` package but was somewhat simplified for this activity. Instead of full date and time information, the point pattern is marked more simply as "Day Time" and "Night Time", to distinguish between diurnal and nocturnal activity of the bear.
+
+Summarize the contents of this dataframe:
+```{r}
+summary(bear_df)
+```
+
+The Min. and Max. of `x` and `y` give us an idea of the region covered by this dataset. We can use these values to approximate a window for the region (as an experiment, you could try changing these values to create regions of different sizes):
+```{r}
+W <- owin(xrange = c(515000, 523500), yrange = c(6812000, 6822000))
+```
+
+Next, we can convert the dataframe into a `ppp`-class object suitable for analysis using the package `spatstat`:
+```{r}
+bear.ppp <- as.ppp(bear_df, W = W)
+```
+
+You can check the contents of the `ppp` object by means of `summary`:
+```{r}
+summary(bear.ppp)
+```
+
+Now that you have loaded the dataframe and converted to a `ppp` object, you are ready for the next activity.
+
+## Activity
+
+**NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
+
+1. (*)Analyze the point pattern for the movements of the bear using quadrat and kernel density methods. Experiment with different quadrat sizes and kernel bandwidths. 
+
+2. Explain your choice of parameters (quadrat sizes and kernel bandwidths) to a fellow student.
+
+3. Decide whether these patterns are random, and support your decision.
+
+4. Do you see differences in the activity patterns of the bear by time of day? What could explain those differences, if any? 
+
+5. Discuss the limitations of your conclusions, and of quadrat/kernel (density-based) approaches more generally.
