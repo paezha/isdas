@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <!-- Institutional logo: save in folder `images` -->
 
-<img src="man/figures/isdas.png" align="right" width=300 />
+<img src="man/figures/isdas.gif" align="right" width=300 />
 <!-- badges: end -->
 
 Package {isdas} is a companion package to the book An Introduction to
@@ -183,126 +183,128 @@ way to keep your work in this course nicely organized.
 
 You can create a new project using the buttons in the toolbar. Figure 2
 shows one way of doing this:
-<img src="man/figures/02-Create-Project-1.gif" width="100%" /> **Figure
-2.** *Create new project - option 1*
+<img src="man/figures/03-create-a-project-1.gif" width="100%" />
+**Figure 2.** *Create new project - option 1*
 
 Figure 3 shows an alternative way of doing the same, using the button
 for managing projects in the R Studio interface:
-<img src="man/figures/03-Create-Project-2.gif" width="100%" /> **Figure
-3.** *Create new project - option 2*
+<img src="man/figures/04-create-a-project-2.gif" width="100%" />
+**Figure 3.** *Create new project - option 2*
 
 You then need to select a new directory to store your new project. Give
 the new directory a name, and save it in a place that you can easily
 find (for instance, the folder where you keep your academic work).
 Figure 4 illustrates the steps to do this:
-<img src="man/figures/04-Create-Project-Directory.gif" width="100%" />
+<img src="man/figures/05-choose-directory-for-project.gif" width="100%" />
 **Figure 4.** *Choose to store the project in a new directory*
 
 After you click ‘Create Project’, you will have an `R` session with your
-new project. This will look like the image in Figure 5.
-<img src="man/figures/05-New-Project.png" width="100%" /> **Figure 5.**
-*Your project keeps all your files nicely organized*
+new project. A project is a great way to keep all your files nicely
+organized.
 
-### Working with your preliminary reading in the course package
+### Working with book chapters
 
 You need to restart R Studio once after installing the package before
-you can access the readings and exercises.
+you can access the templates with the book chapters and activities.
 
-After doing so, you will find that all your readings are included in the
-course package. Each reading is like a mini-chapter in a book (instead
-of asking you to buy a book, we will give you the contents). But
-readings can be much more than that. To begin working with your
-preliminary reading, you begin by creating a new file and choosing R
-Markdown from a template. Select template `Reading-0` from the course
-package and give it a name. After you click ‘OK’, a new R Markdown file
-will open in your editor. Also, notice that a new folder appears in your
-project to keep this file. The process is illustrated in Figure 6.
-<img src="man/figures/06-New-File-Reading.gif" width="100%" /> **Figure
-6.** *Creating a new file from a template*
+After doing so, you will find that all the chapters in the book are
+included in the package (instead of asking you to buy a book, we will
+give you the contents). Chapter templates, though, can become much more
+than just chapters in a printed book. Think of them as a living version
+of the book, one that you can take ownership of and adapt to your
+learning style and preferences. To begin working with the book chapters,
+you will need to create a new file from a template. You can do this from
+the button for new files in the toolbar or from the drop-down menu for
+File, see below.
+<img src="man/figures/06-create-chapter-from-template-1.gif" width="100%" />
+**Figure 6.** *Creating a new file from a template using the button in
+the toolbar*
+
+As an alternative, you can create a new file using the drop-down menu.
+If you correctly installed the package, the templates should be listed
+in the next box. To begin, select the template for
+`02-Chapter-Basic-Operations` from the course package and give it a name
+(the name could be anything, but it makes sense to name files
+logically). After you click ‘OK’, a new R Markdown file will open in
+your editor. Also, notice that a new folder appears in your project
+where this file is located. Any other files that are placed there when
+you create the chapter from a template are *required*, so do *not*
+delete them.
+
+This process is illustrated in Figure 7.
+<img src="man/figures/07-create-chapter-from-template-2.gif" width="100%" />
+**Figure 7.** *Creating a new file from a template using the drop-down
+menu*
 
 Your new file is an R Markdown document. This is a text file with
-*chunks* of code that can be executed. Reading 0 will introduce you to
-the use of R Markdown. The document is editable, which means that you
-can annotate it. To begin with, you can add your name to the list of
-authors of the document. You can execute code by clicking on the ‘play’
-icon on the top-right corner of a chunk of code. The template also
-includes a definition for a *textbox*. You can introduce a textbox in
-the text using this format:
+*chunks* of code that can be executed. Chapter 2 will introduce you to
+the use of `R` and the template is also a good introduction to R
+Markdown. The document is editable, which means that you can annotate
+it. To begin with, you can add your name to the list of authors of the
+document. You can execute code by clicking on the ‘play’ icon on the
+top-right corner of a chunk of code. The template also includes a
+definition for a *textbox*. You can introduce a textbox in the text
+using this format:
 
     :::{.textbox data-latex=""}
     This is my annotation.
     :::
 
-Figure 7 illustrates these steps.
-<img src="man/figures/07-Working-with-Reading.gif" width="100%" />
-**Figure 7.** *Working with your reading*
+Figure 7 shows some of these steps.
+<img src="man/figures/08-working-with-chapter.gif" width="100%" />
+**Figure 7.** \_Working with your chapter file
 
 Once you are happy with your work using this file, you can create a pdf
-file to study by *knitting* the document. Knitting will convert the R
-Markdown to a pdf file. Click the Knit button in the top left corner to
-do this. You can knit your document at any time, and as many times as
-you want; remember, you can always start afresh by creating a new R
-Markdown file with the same template. See Figure 8 for an example of
-knitting. <img src="man/figures/08-Knitting.gif" width="100%" />
-**Figure 8.** *Click ‘Knit’ on the toolbar to convert your R Markdown
-into a pdf file*
+file to study/keep/share by *knitting* the document. Knitting will
+convert the R Markdown to a pdf file. Click the Knit button in the top
+left corner to do this. You can knit your document at any time, and as
+many times as you want; remember, you can always start afresh by
+creating a new R Markdown file with the same template. See Figure 8 for
+an example of knitting.
+<img src="man/figures/09-knitting-chapter.gif" width="100%" /> **Figure
+8.** *Click ‘Knit’ on the toolbar to convert your R Markdown into a pdf
+file*
 
 Figure 9 shows the result of knitting your R Markdown file.
-<img src="man/figures/09-Knitted-Reading.png" width="100%" /> **Figure
-9.** *The result of knitting is a pdf file with your reading*
+<img src="man/figures/10-knitted-chapter.png" width="100%" /> **Figure
+9.** *The result of knitting is a pdf file with your Chapter*
 
 Since you can edit and annotate the text, you can essentially
 *customize* the chapter so that it is a unique reflection of your
-learning. As you progress with the course and complete all the readings,
+learning. As you progress with the course and complete all the chapters,
 you will have a collection of *unique* chapters that track your very
-personal learning experience in this course.
+personal learning experience using the book.
 
-### Working on your first exercise
+### Working with activities
 
-Working on your exercises (which you will submit for grading) is very
-similar to working with your readings. First, you need to create a new R
-Markdown file from a template. For the first exercise, you would select
-the template for `Exercise-1`. Figure 10 illustrates the steps. Use the
-following naming convention for your exercise files:
-`exercise-number-studentnumber`. Once you click ‘OK’ a new R Markdown
-file will appear in your editor, as well as a new folder where this file
-resides.
-<img src="man/figures/10-Start-New-Exercise.gif" width="100%" />
-**Figure 10.** *Creating a new file to work on an exercise*
+Working on your activities (which you may need to submit for grading if
+you are using this as part of a course) is very similar to working with
+your readings. First, you need to create a new R Markdown file from a
+template. For the first activity, you would select the template for
+`04-Activity-Statistical-Maps`. Figure 10 illustrates the steps. Again,
+you can give the file any name you want, but it makes sense to name them
+logically. Once you click ‘OK’ a new R Markdown file will appear in your
+editor, as well as a new folder where this file resides (see Figure 11).
+<img src="man/figures/11-creating-activity-from-template.gif" width="100%" />
+**Figure 11.** *Creating a new file to work on an activity*
 
 To begin, you can edit the header of the document with your personal
-information, like name and student number (see Figure 11).
-<img src="man/figures/11-Working-on-an-Exercise-YAML.gif" width="100%" />
-**Figure 11.** *Entering your personal information in the header of the
-R Markdown document*
+information, like name and student number (see Figure 11). You can also
+run chunks of code. And importantly, to work on your exercise, you can
+enter your answers as text and create new chunks of code to do any
+calculations you need for your answers, as shown in Figure 12.
+<img src="man/figures/12-working-with-activity.gif" width="100%" />
+**Figure 12.** *Working on an activity*
 
-You can also run chunks of code (see Figure 12).
-<img src="man/figures/12-Working-on-an-Exercise-Chunks.gif" width="100%" />
-**Figure 12.** *Running chunks of code in your exercise*
+After you complete your activity you can knit the document to generate
+the pdf file for saving/submission/sharing. Click the Knit button in the
+top left corner to knit (see Figure 13).
+<img src="man/figures/13-knitting-activity.gif" width="100%" /> **Figure
+13.** *Knitting the activity*
 
-And importantly, to work on your exercise, you can enter your answers as
-text and create new chunks of code to do any calculations you need for
-your answers, as shown in Figure 13.
-<img src="man/figures/13-Working-on-an-Exercise-Answers.gif" width="100%" />
-**Figure 13.** *Working to answer the questions in your exercise*
+This is the knitted activity:
+<img src="man/figures/14-knitted-activity.png" width="100%" /> **Figure
+13.** *Knitted activity*
 
-After you complete your exercise, you will need to return to the header
-and complete two sections: `highlights` and `threshold_concepts`. The
-highlights ask you to reflect on your learning experience working on the
-exercise. Try to write concisely in approximately 200 words. The
-threshold concepts are key ideas that once you grasp them they change
-your understanding of a topic, phenomenon, subject, method, etc. Write
-between three and five threshold concepts that apply to your learning
-experience working on this exercise. Figure 14 illustrates this step.
-<img src="man/figures/14-Working-on-an-Exercise-Highlights.gif" width="100%" />
-**Figure 14.** *Writing the highlights of the exercise*
-
-The highlights and threshold concepts are the last element of your
-exercise, and after writing them you can knit the document to generate
-the pdf file for submission. Click the Knit button in the top left
-corner to knit (see Figure 15).
-<img src="man/figures/15-Knitting-the-Exercise.gif" width="100%" />
-**Figure 15.** *Knitting the exercise*
-
-You are now ready to submit the exercise following the instructions in
-the course outline.
+If you are using this as part of a course, make sure to check the course
+outline for instructions about how and when to submit.
