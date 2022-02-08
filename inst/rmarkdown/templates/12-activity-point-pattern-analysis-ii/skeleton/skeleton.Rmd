@@ -32,7 +32,8 @@ always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      out.width = "1\\linewidth")
 ```
 
 ## Practice questions

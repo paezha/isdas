@@ -18,8 +18,9 @@ output:
 always_allow_html: true
 ---
 
-```{r ch02-setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      out.width = "1\\linewidth")
 ```
 
 The preceding chapter showed you how to install `R` and RStudio, and explained some key concepts, such as packages as fundamental units of reproducible code, and the concept of your library (where the packages that you install are stored).

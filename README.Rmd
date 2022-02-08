@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 <img src="man/figures/isdas.gif" align="right" width=300 />
 <!-- badges: end -->
 
-Package {isdas} is a companion package to the book An Introduction to [Spatial Data Analysis and Statistics: A Course in R](https://paezha.github.io/spatial-analysis-r/). As an open educational resource, it aims to combine various advantages of working with the [`R` statistical computing project](https://www.r-project.org/):
+Package {isdas} is a companion package to the book [An Introduction to Spatial Data Analysis and Statistics: A Course in R](https://paezha.github.io/spatial-analysis-r/). As an open educational resource, it aims to combine various advantages of working with the [`R` statistical computing project](https://www.r-project.org/):
 
 - Ease of distribution
 - Reproducibility
