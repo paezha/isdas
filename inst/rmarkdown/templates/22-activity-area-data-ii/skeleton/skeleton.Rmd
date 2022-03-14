@@ -33,7 +33,8 @@ always_allow_html: true
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
-                      out.width = "1\\linewidth")
+                      fig.align='center',
+                      out.width = "0.8\\linewidth")
 ```
 
 ## Practice questions

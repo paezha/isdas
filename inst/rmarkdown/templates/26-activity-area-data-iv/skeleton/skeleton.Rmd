@@ -1,5 +1,5 @@
 ---
-title: "24 Activity: Area Data III"
+title: "26 Activity: Area Data IV"
 author:
   # Enter your name and student number here:
 - name: My Name
@@ -33,7 +33,8 @@ always_allow_html: true
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
-                      out.width = "1\\linewidth")
+                      fig.align='center',
+                      out.width = "0.8\\linewidth")
 ```
 
 ## Practice questions
@@ -76,6 +77,7 @@ library(isdas)
 library(sf)
 library(spdep)
 library(tidyverse)
+library(webshot2)
 ```
 
 Begin by loading the data that you will use in this activity:
@@ -161,11 +163,11 @@ You are now ready for the next activity.
 
 ## Activity
 
-**NOTE**: Activities include technical "how to" tasks/questions  (indicated with *). Usually, these ask you to practice using the software to organize data, create plots, and so on in support of analysis and interpretation. The second type of questions ask you to activate your brainware and to think geographically and statistically.
+**NOTE**: Activities include technical "how to" tasks/questions (indicated with *). Usually, these ask you to practice using the software to organize data, create plots, and so on in support of analysis and interpretation. The second type of questions ask you to activate your brainware and to think geographically and statistically.
 
 1. (*) Create local Moran maps for the population in age group 20-34 and _proportion_ of population in age group 20-34. 
 
-2. (\*) Use the $G_i^*$ statistic to analyze the population _and_ proportion of population in the age group 20-34.
+2.  (\*) Use the $G_i^*$ statistic to analyze the population _and_ proportion of population in the age group 20-34.
 
 3. (*) Now create local Moran maps for the population and _population density_ in the age group 20-34. 
 
@@ -174,4 +176,3 @@ You are now ready for the next activity.
 5. Concerning the analysis in point 2: What is the difference between using population (absolute) and proportion of population (rate)? Is there a reason to prefer either variable in analysis? Discuss.
 
 6. More generally, what do you think should guide the decision of whether to analyze variables as absolute values or rates?
-

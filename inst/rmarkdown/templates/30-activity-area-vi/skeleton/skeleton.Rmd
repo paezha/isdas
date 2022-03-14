@@ -1,0 +1,139 @@
+---
+title: "30 Activity: Area Data VI"
+author:
+  # Enter your name and student number here:
+- name: My Name
+  student_number: 123456789
+subject: "Course Code and Name"
+
+# The next two sections are for your own benefit. In the highlights you can briefly reflect about your learning experience while working on this activity. After completing the questions in the activity, use this space to write your thoughts about your learning experience. What did you learn working on this assignment? How were you challenged? Was it easy? What did you do that worked? What would you do differently? You can use more than one paragraph but remember to indent the paragraphs. This summary does not need to be very long, try to write it in about 200 words.
+highlights: |
+    This is my mini-reflection. Paragraphs must be indented.
+    
+    It can contain multiple paragraphs.
+    
+# Write the concepts that in your opinion are threshold concepts in this exercise. A threshold concept is a key idea that once you grasp it, it changes your understanding of a topic, phenomenon, subject, method, etc. Write between three and five threshold concepts that apply to your learning experience working on this exercise.
+threshold_concepts: 
+- threshold concept 1
+- threshold concept 2 
+- threshold concept 3
+- threshold concept 4
+
+# Do not edit below this line unless you know what you are doing
+# --------------------------------------------------------------
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  pdf_document:
+    # The project-template-default.tex file was heavily  adapted from Steven V. Miller's template for academic manuscripts. See:
+    # http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/
+    # https://github.com/svmiller/svm-r-markdown-templates/blob/master/svm-latex-ms.tex
+    template: exercise-template-default.tex
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      fig.align='center',
+                      out.width = "0.8\\linewidth")
+```
+
+## Practice questions
+
+Answer the following questions:
+
+1. Describe and discuss the possible sources of autocorrelation in the residuals of a model.
+2. List possible corrective/remedial actions when residual autocorrelation is detected.
+3. Under which situations is a Spatial Error Model an adequate modeling strategy? 
+
+## Learning objectives
+
+In this activity, you will:
+
+1. Explore a dataset with area data using visualization as appropriate.
+2. Discuss a process that might explain any pattern observed from the data.
+3. Conduct a modeling exercise using appropriate techniques. Justify your modeling decisions.
+
+## Suggested reading
+
+O'Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 5. John Wiley & Sons: New Jersey.
+
+## Preliminaries
+
+It is good practice to clear the workspace to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
+```{r}
+rm(list = ls())
+```
+
+Note that `ls()` lists all objects currently on the workspace.
+
+Load the libraries you will use in this activity (load other packages as appropriate). 
+```{r ch30-load-packages, message = FALSE, warning=FALSE}
+library(isdas)
+library(sf)
+library(spatstat)
+library(spdep)
+library(tidyverse)
+library(webshot2)
+```
+
+Choose a data set with area data that interests you. These are two possibilities:
+
+### New York leukemia data
+
+```{r}
+data("nyleukemia")
+```
+
+A `SpatialPolygonsDataFrame` that contains the following variables:
+
+* AREANAME name of census tract
+* AREAKEY unique FIPS code for each tract
+* POP8 population size (1980 U.S. Census)
+* TRACTCAS number of cases of leukemia (1978-1982)
+* PROPCAS proportion of cases per tract
+* PCTOWNHOME percentage of people in each tract owning their own home
+* PCTAGE65P percentage of people in each tract aged 65 or more
+* Z transformed proportions
+* AVGIDIST average distance between centroid and TCE sites
+* PEXPOSURE "exposure potential": inverse distance between each census tract centroid and the nearest TCE site, IDIST, transformed via log(100*IDIST)
+
+This can be converted to a simple features object as follows:
+```{r}
+nyleukemia.sf <- st_as_sf(nyleukemia)
+```
+
+### Pennsylvania lung cancer
+
+```{r}
+data("pennlc")
+```
+
+A `SpatialPolygonsDataFrame` that contains the following variables:
+
+* county: Name of the county
+* cases: Number of cases of lung cancer
+* population: Population by county
+* rate: Lung cancer rate by county
+* smoking: Smoking rate by county
+* cancer_ rate: Lung cancer rate by county (%)
+* smoking_rate: Smoking rate by county  (%)
+
+This can be converted to a simple features object as follows:
+```{r}
+pennlc.sf <- st_as_sf(pennlc)
+```
+
+## Activity
+
+**Capstone Activity**
+
+This is a capstone activity where you can work free-style on a data set of your choice, and put in practice what you
+have learned with respect to the analysis of area data.
+
+1. Partner with a fellow student to analyze the chosen dataset.
+
+2. Visualize/explore the data set using appropriate tools.
+
+3. Analyze your data set by means of regression modeling. Which should be the dependent variable in your dataset? Why?
+
+4. Discuss the results of your analysis, including possible limitations, and possible ways to improve it (e.g., what additional variables would you like to use?)
