@@ -11,8 +11,9 @@
 #' @examples
 #' # Create a map of local Moran's I statistics for population density
 #' #
+#' data(Hamilton_CT)
 #' # Obtain a listw object for the contiguities. First obtain the neighbors:
-#' Hamilton_CT.nb <- spdep::poly2nb(as(Hamilton_CT, "Spatial"))
+#' Hamilton_CT.nb <- spdep::poly2nb(Hamilton_CT)
 #' # Based on the neighbors, obtain a listw object:
 #' Hamilton_CT.w <- spdep::nb2listw(Hamilton_CT.nb)
 #'

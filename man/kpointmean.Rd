@@ -2,30 +2,25 @@
 % Please edit documentation in R/kpointmean.R
 \name{kpointmean}
 \alias{kpointmean}
-\title{A funcion that implements k-point mean interpolation}
+\title{A function that implements k-point mean interpolation}
 \usage{
-kpointmean(source_xy, z, target_xy, k, longlat = FALSE)
+kpointmean(source_xy, target_xy, z, k, longlat = FALSE)
 }
 \arguments{
-\item{source_xy}{A two column vector with x and y coordinates of the source points for interpolation}
+\item{source_xy}{A simple features object of type POINT with the source points for interpolation}
 
-\item{z}{A numeric vector of variable values at points \code{source_xy}}
+\item{target_xy}{A simple features object of type POINT with the target points for interpolation}
 
-\item{target_xy}{A two column vector with x and y coordinates of the target points for interpolation}
+\item{z}{The name of the column with the variable in \code{source_xy} to interpolate}
 
 \item{k}{A number that defines the number of neighbors used for interpolation}
 
 \item{longlat}{TRUE if coordinates are in long/lat}
 }
 \value{
-A SpatialPolygonsDataFrame object.
+A simple features object.
 }
 \description{
 This function calculates the spatial mean based on the k-nearest neighbors of a focal point or set of focal points.
-}
-\examples{
-# Interpolate
-target_xy = expand.grid(x = seq(0.5, 259.5, 2.2), y = seq(0.5, 299.5, 2.2))
-source_xy = cbind(x = Walker_Lake$X, y = Walker_Lake$Y)
 }
 \keyword{spatial}
