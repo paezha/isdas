@@ -7,10 +7,10 @@ NULL
 
 #' isdas
 #'
-#' A package with data sets and functions used in the book An Introduction to Spatial Data Analysis and Statistics: A Course in \code{R}.
+#' A package with data sets and functions used in the book _An Introduction to Spatial Data Analysis and Statistics: A Course in_ \code{R}.
 #'
-#' @author Antonio Paez [cre, aut], \email{paezha@@mcmaster.ca}, Anastassios Dardas [ctb], Raj Ubhi [ctb]
-#' @name isdas
+#' @author Antonio Paez, School of Earth, Environment and Society, McMaster University \email{paezha@@mcmaster.ca}
+#' @name isdas-package
 #' @docType package
 #' @import deldir dplyr plotly sp spdep stats
 #'
@@ -448,7 +448,7 @@ NULL
 
 #' Walker_Lake
 #'
-#' A dataset with geocoded observations of a series of variables originally used for teahcing geostatistics in Isaaks and Srivastava's [An Introduction to Geostatistics].
+#' A dataset with geocoded observations of a series of variables originally used for teaching geostatistics in Isaaks and Srivastava's _An Introduction to Geostatistics_.
 #'  The variables are as follows:
 #'
 #'  \itemize{
@@ -465,7 +465,7 @@ NULL
 #' @name Walker_Lake
 #' @usage data(Walker_Lake)
 #' @format A dataset with 470 rows and 6 variables
-#' @source \url{https://books.google.ca/books?id=vC2dcXFLI3YC&dq=introduction+to+applied+geostatistics+isaaks+and+srivastava&hl=en&sa=X&ved=0ahUKEwiKg6_iyrXZAhUjp1kKHd_jAVcQ6AEIKTAA}
+#' @source \url{https://books.google.ca/books/about/Applied_Geostatistics.html?id=vC2dcXFLI3YC&redir_esc=y}
 "Walker_Lake"
 
 #' aquifer

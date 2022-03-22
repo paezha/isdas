@@ -8,13 +8,13 @@
 A dataset with 470 rows and 6 variables
 }
 \source{
-\url{https://books.google.ca/books?id=vC2dcXFLI3YC&dq=introduction+to+applied+geostatistics+isaaks+and+srivastava&hl=en&sa=X&ved=0ahUKEwiKg6_iyrXZAhUjp1kKHd_jAVcQ6AEIKTAA}
+\url{https://books.google.ca/books/about/Applied_Geostatistics.html?id=vC2dcXFLI3YC&redir_esc=y}
 }
 \usage{
 data(Walker_Lake)
 }
 \description{
-A dataset with geocoded observations of a series of variables originally used for teahcing geostatistics in Isaaks and Srivastava's \link{An Introduction to Geostatistics}.
+A dataset with geocoded observations of a series of variables originally used for teaching geostatistics in Isaaks and Srivastava's \emph{An Introduction to Geostatistics}.
 The variables are as follows:
 }
 \details{

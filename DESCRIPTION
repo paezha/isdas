@@ -1,6 +1,6 @@
 Package: isdas
 Title: Companion Package for Book An Introduction to Spatial Data Analysis and Statistics
-Version: 0.0.0.0400
+Version: 0.0.0.0500
 Authors@R: 
     c(person("Antonio", "Páez", , "paezha@mcmaster.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6912-9919")),
