@@ -201,7 +201,7 @@ NULL
 #' @name bear_df
 #' @usage data(bear_df)
 #' @format A data frame with 1000 rows and 3 variables
-#' @source \url{(http://bearproject.info/about-the-project/)}
+#' @source \url{https://www.brownbearproject.com/about-the-project}
 "bear_df"
 
 #' pp0_df

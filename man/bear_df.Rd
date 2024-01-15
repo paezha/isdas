@@ -8,7 +8,7 @@
 A data frame with 1000 rows and 3 variables
 }
 \source{
-\url{(http://bearproject.info/about-the-project/)}
+\url{https://www.brownbearproject.com/about-the-project}
 }
 \usage{
 data(bear_df)
