@@ -45,7 +45,7 @@ In this practice, you will learn about:
 
 ## Preliminaries
 
-As usual, it is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in `R` to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
+As usual, it is recommended that you begin your work with a new session of `R`. At the very least, make sure that the working space is clear from extraneous items there may have been there from earlier. The command in `R` to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
 ```{r}
 rm(list = ls())
 ```
@@ -60,7 +60,6 @@ library(plotly)
 library(sf)
 library(spdep)
 library(tidyverse)
-library(webshot2)
 ```
 
 Load the datasets:
@@ -94,27 +93,18 @@ Hamilton_CT.w <- nb2listw(poly2nb(pl = Hamilton_CT))
 
 And here is the scatterplot of population density again:
 ```{r}
-# We can use the arguments xlab and ylab in `moran.plot()` 
-# to change the labels for the two axes of the plot
-mp <- moran.plot(Hamilton_CT$POP_DENSITY, 
-                 Hamilton_CT.w, 
-                 xlab = "Population Density", 
-                 ylab = "Lagged Population Density")
+# We can use the arguments xlab and ylab in `moran.plot()` to change the labels for the two axes of the plot
+mp <- moran.plot(Hamilton_CT$POP_DENSITY, Hamilton_CT.w, xlab = "Population Density", ylab = "Lagged Population Density")
 ```
 
 The reason some observations are highlighted is because they have been identified as "influential", meaning that they make a particularly large contribution to the calculation of $I$. It turns out that the relative contribution of each observation to the calculation of Moran's $I$ is informative in and of itself, and its analysis can provide more focused information about the spatial pattern.
 
 To explore this, we will recreate the scatterplot manually to have better control of its aspect. To do this, we first create a dataframe with the mean-centered and scaled variable $z_i=(x_i-\overline{x})/\sum z_i^2$, and its spatial moving average. We will also create a factor variable (call it `Type`) to identify the type of spatial relationship (Low & Low, if both $z_i$ and its spatial moving average are negative, High & High, if both $z_i$ and its spatial moving average are positive, and Low & High/High & Low otherwise). This is information is useful for mapping the results:
 ```{r}
-# Use the pipe operator to pass the dataframe as an argument to `mutate()`,
-# which is used to create new variables.
-Hamilton_CT <- Hamilton_CT %>% 
-  # Create a mean-centered variable that is standardized by the variance.
-  mutate(Z = (POP_DENSITY - mean(POP_DENSITY)) / var(POP_DENSITY),
-         # Calculate the spatial moving average of variable `Z`.
-         SMA = lag.listw(Hamilton_CT.w, Z), 
-         # The function `case_when()` is used to evaluate several logical
-         # conditions and respond to them. 
+Hamilton_CT <- Hamilton_CT |> # Use the pipe operator to pass the dataframe as an argument to `mutate()`, which is used to create new variables.
+  mutate(Z = (POP_DENSITY - mean(POP_DENSITY)) / var(POP_DENSITY), # Create a mean-centered variable that is standardized by the variance.
+         SMA = lag.listw(Hamilton_CT.w, Z), # Calculate the spatial moving average of variable `Z`.
+         # The function `case_when()` is used to evaluate several logical conditions and respond to them. 
          Type = case_when(Z < 0 & SMA < 0 ~ "LL",
                           Z > 0 & SMA > 0 ~ "HH",
                           TRUE ~ "HL/LH"))
@@ -130,39 +120,45 @@ df_msc.sd <- SharedData$new(Hamilton_CT)
 
 The function `bscols()` (for bootstrap columns) is used to array two `plotly` objects; the first of these is a scatterplot, and the second is a choropleth map of population density.
 ```{r warning=FALSE, message=FALSE}
-bscols(
-  # The first plot is Moran's scatterplot
-  # Create a `plotly` object using the dataframe as an input.
-  # The pipe operator passes this object to the function `add_markers()`;
-  # this function is similar to the `geom_point()` function in `ggplot2`
-  # and it draws objects on the blank plot created by `plot_ly()`
-  plot_ly(df_msc.sd) %>% 
-    add_markers(trace = "scatter",
-                x = ~Z, 
-                y = ~SMA, 
-                color = ~POP_DENSITY, 
-                size = ~(Z * SMA), 
-                colors = "YlOrRd") %>%
-    # Remove the colorbar from the plot.
-    hide_colorbar() %>%     
-    # Highlight observations when selected.
-    highlight("plotly_selected"),
-  # The second plot is a choropleth map
-  # Create a `plotly` object using the dataframe as an input. 
-  # The pipe operator passes this object to the function `add_sf()`; 
-  # this function is similar to the `geom_sf()` functions in `ggplot2`
-  # and it draws a simple features object on the blank plot created
-  # by `plot_ly()`
-  plot_ly(df_msc.sd) %>% 
-    add_sf(split = ~TRACT,
-           color = ~POP_DENSITY, 
-           colors = "YlOrRd", 
-           showlegend = FALSE) %>%
-    # Remove colorbar from the plot.
-    hide_colorbar() %>% 
-    # Highlight observations when selected.
-    highlight(dynamic = TRUE) 
-)
+# The first plot is Moran's scatterplot
+  scp <- plot_ly(df_msc.sd) |> # Create a `plotly` object using the dataframe as an input. The pipe operator passes this object to the function `add_markers()`; this function is similar to the `geom_point()` function in `ggplot2` and it draws objects on the blank plot created by `plot_ly()`
+    add_markers(x = ~Z, y = ~SMA, color = ~POP_DENSITY, size = ~(Z * SMA), colors = "YlOrRd") |>
+    hide_colorbar() |>     # Remove the colorbar from the plot.
+    highlight("plotly_selected") # Highlight observations when selected.
+
+# The second plot is a choropleth map
+  map <- plot_ly(df_msc.sd) |> # Create a `plotly` object using the dataframe as an input. The pipe operator passes this object to the function `add_sf()`; this function is similar to the `geom_sf()` functions in `ggplot2` and it draws a simple features object on the blank plot created by `plot_ly()`
+    add_sf(split = ~TRACT, color = ~POP_DENSITY, colors = "YlOrRd", showlegend = FALSE) |>
+    hide_colorbar() |> # Remove colorbar from the plot.
+    highlight(dynamic = TRUE) # Highlight observations when selected.
+
+im1 <- bscols(scp,
+              map)
+
+
+# This code takes a screen capture of the figure to include it in the 
+# pdf file when knitting
+htmlwidgets::saveWidget(widget = scp, 
+                        file = "scp.html")
+webshot2::webshot(url = "scp.html", 
+                  file = "scp.png", 
+                  delay = 1, 
+                  zoom = 4, 
+                  vheight = 500)
+
+htmlwidgets::saveWidget(widget = map, 
+                        file = "map.html")
+webshot2::webshot(url = "map.html", 
+                  file = "map.png", 
+                  delay = 1, 
+                  zoom = 4, 
+                  vheight = 500)
+```
+
+```{r eval=FALSE}
+# This code displays the figure in the Rmd document 
+# but is not run for knitting to pdf
+im1
 ```
 
 The darker colors are zones with higher population densities. The size of the dots in the scatterplot indicates the contributions of the zone to Moran's $I$. The darker colors in the choropleth map are higher population densities.Since the plots are linked for brushing, it is possible to selecting groups of dots in the scatterplot (double click to clear a selection). Change the color for brushing to select a different group of dots. Can you identify in the map the zones that most contribute to Moran's $I$?
@@ -205,35 +201,30 @@ Similar to the global version of Moran's $I$, hypothesis testing can be conducte
 
 For further exploration, join the local statistics to the dataframe:
 ```{r }
-Hamilton_CT <- Hamilton_CT %>% 
+Hamilton_CT <- Hamilton_CT |> 
   left_join(data.frame(TRACT = Hamilton_CT$TRACT, 
                        POP_DENSITY.lm), 
             by = "TRACT") # Join the results of `localmoran()` to the dataframe
 ```
 
 Now it is possible to map the local statistics. Since we added the $p$-value of the local statistics, we can distinguish between those with small (say, less than 0.05) and large $p$-values:
-```{r}
-# The function `add_sf()` draws a simple features object, 
-# similar to `geom_sf()` in `ggplot2`. We "split" observations 
-# based on their p-values: if the p-value is less than 0.05, 
-# the condition is "TRUE" and otherwise it is "FALSE". Finally, 
-#we color the zones based on their `Type`: that is, whether they 
-# are High & High according to the local statistic, or Low & Low, etc.
-im1 <- plot_ly(Hamilton_CT) %>%
-    add_sf(type = "scatter",
-           split = ~(p.val < 0.05), 
-           color = ~Type, 
-           colors = c("red", 
-                      "khaki1", 
-                      "dodgerblue", 
-                      "dodgerblue4"))
+```{r }
+# The function `add_sf()` draws a simple features object, similar to `geom_sf()` in `ggplot2`. We "split" observations based on their p-values: if the p-value is less than 0.05, the condition is "TRUE" and otherwise it is "FALSE". Finally, we color the zones based on their `Type`: that is, whether they are High & High according to the local statistic, or Low & Low, etc.
+map <- plot_ly(Hamilton_CT) |>
+  add_sf(type = "scatter",
+         split = ~(p.val < 0.05), 
+         color = ~Type, 
+         colors = c("red", 
+                    "khaki1", 
+                    "dodgerblue", 
+                    "dodgerblue4")) 
 
 # This code takes a screen capture of the figure to include it in the 
 # pdf file when knitting
-htmlwidgets::saveWidget(widget = im1, 
-                        file = "im1.html")
-webshot2::webshot(url = "im1.html", 
-                  file = "im1.png", 
+htmlwidgets::saveWidget(widget = map, 
+                        file = "map.html")
+webshot2::webshot(url = "map.html", 
+                  file = "map.png", 
                   delay = 1, 
                   zoom = 4, 
                   vheight = 500)
@@ -242,7 +233,7 @@ webshot2::webshot(url = "im1.html",
 ```{r eval=FALSE}
 # This code displays the figure in the Rmd document 
 # but is not run for knitting to pdf
-im1
+map
 ```
 
 The map above shows whether population density in a zone is high, surrounded by other zones with high population densities (HH), or low, surrounded by zones that also have low population density (LL). Other zones have either low population densities and are surrounded by zones with high population density, or vice-versa (HL/LH). 
@@ -254,19 +245,16 @@ This map allows you to identify what we could call the downtown core (from the p
 While mapping $I_i$ or their corresponding $p$-values is straightforward, I personally find it more useful to map whether the zones are of type HH, LH, or HL/LH. Since such maps are not (to the best of my knowledge) the output of an existing function in an R package, so we will create one here.
 
 ```{r}
-# A function is a way of packaging a set of standard instructions.
-# Here, we package all the steps we used above to create the map 
-# of the local Moran coefficients in a new function called 
-# `localmoran.map()`
+# A function is a way of packaging a set of standard instructions. Here, we package all the steps we used above to create the map of the local Moran coefficients in a new function called `localmoran.map()`
 localmoran.map <- function(p, listw, VAR, by){
   # p is a simple features object
   require(tidyverse)
   require(spdep)
   require(plotly)
   
-  df_msc <- p %>% 
+  df_msc <- p |> 
     rename(VAR = as.name(VAR),
-              key = as.name(by)) %>%
+              key = as.name(by)) |>
     transmute(key,
               VAR,
               Z = (VAR - mean(VAR)) / var(VAR),
@@ -284,7 +272,7 @@ localmoran.map <- function(p, listw, VAR, by){
                                  local_I),
                       by = "key")
   
-  plot_ly(df_msc) %>%
+  plot_ly(df_msc) |>
     add_sf(type = "scatter",
            split = ~(p.val < 0.05), 
            color = ~Type, 
@@ -299,16 +287,17 @@ Notice how this function simply replicates the steps that we followed earlier to
 
 To use this function you need as inputs an object of class `sf`, a `listw` object with spatial weights, and to define the variable of interest and a unique identifier for the areas (such as their tract identifiers). For example:
 ```{r message=FALSE, warning=FALSE}
-im2 <- localmoran.map(Hamilton_CT, Hamilton_CT.w, 
+lmp <- localmoran.map(Hamilton_CT, Hamilton_CT.w, 
                "POP_DENSITY", 
                by = "TRACT")
 
+
 # This code takes a screen capture of the figure to include it in the 
 # pdf file when knitting
-htmlwidgets::saveWidget(widget = im2, 
-                        file = "im2.html")
-webshot2::webshot(url = "im2.html", 
-                  file = "im2.png", 
+htmlwidgets::saveWidget(widget = lmp, 
+                        file = "lmp.html")
+webshot2::webshot(url = "lmp.html", 
+                  file = "lmp.png", 
                   delay = 1, 
                   zoom = 4, 
                   vheight = 500)
@@ -317,7 +306,7 @@ webshot2::webshot(url = "im2.html",
 ```{r eval=FALSE}
 # This code displays the figure in the Rmd document 
 # but is not run for knitting to pdf
-im2
+lmp
 ```
 
 There, the function creates the map as desired.
@@ -347,26 +336,24 @@ sum(df1_simulated$z)
 
 The following is an interactive plot of variable `z` in the sample dataframe `df1`. This variable is spatially random:
 ```{r}
-# Define how variables in the table are represented in the plot:
-# for instance, the variable `x` corresponds to the x axis. Next,
-# define the properties of the markers, or geometric objects in 
-# the plot. For example, their color will be proportional to variable `z` 
-im3 <- plot_ly(df1_simulated, 
+# Define how variables in the table are represented in the plot: for instance, the variable `x` corresponds to the x axis. Next, define the properties of the markers, or geometric objects in the plot. For example, their color will be proportional to variable `z` 
+cp1 <- plot_ly(df1_simulated, 
         x = ~x, 
         y = ~y, 
         z = ~z, 
         marker = list(color = ~z, 
                       colorscale = c('#FFE1A1', 
                                      '#683531'), 
-                      showscale = TRUE)) %>%
+                      showscale = TRUE)) |>
   add_markers()
+
 
 # This code takes a screen capture of the figure to include it in the 
 # pdf file when knitting
-htmlwidgets::saveWidget(widget = im3, 
-                        file = "im3.html")
-webshot2::webshot(url = "im3.html", 
-                  file = "im3.png", 
+htmlwidgets::saveWidget(widget = cp1, 
+                        file = "cp1.html")
+webshot2::webshot(url = "cp1.html", 
+                  file = "cp1.png", 
                   delay = 1, 
                   zoom = 4, 
                   vheight = 500)
@@ -375,7 +362,7 @@ webshot2::webshot(url = "im3.html",
 ```{r eval=FALSE}
 # This code displays the figure in the Rmd document 
 # but is not run for knitting to pdf
-im3
+cp1
 ```
 
 Imagine that you stand at coordinates x = 53 and y = 34 (we will call this location the focal point), and you survey the landscape within a radius $r$ of 10 (units of distance) of this location. How much wealth is concentrated in the neighborhood of the focal point? Lets see:
@@ -384,13 +371,10 @@ Imagine that you stand at coordinates x = 53 and y = 34 (we will call this locat
 xy0 <- c(53, 34)
 # Select a radius
 r <- 10
-# Extract observations that are within a radius of `r` 
-# from focal point `xy0` (note that sqrt((x - xy0)^2 + (x - xy0)^2)
-# is Pythagoras's formula for calculating the distance between 
-# two points; if this distance is less than `r`, the point is kept)
-df1_simulated %>% 
-  subset(sqrt((x - xy0[1])^2 + (y - xy0[2])^2) < r) %>%
-  select(z) %>% 
+# Extract observations that are within a radius of `r` from focal point `xy0` (note that sqrt((x - xy0)^2 + (x - xy0)^2) is Pythagoras's formula for calculating the distance between two points; if this distance is less than `r`, the point is kept)
+df1_simulated |> 
+  subset(sqrt((x - xy0[1])^2 + (y - xy0[2])^2) < r) |>
+  select(z) |> 
   sum()
 ```
 
@@ -402,22 +386,23 @@ Now, for a fixed radius, change the focal point, and see how much the concentrat
 
 We will now repeat the thought experiment but now with the landscape shown in the following figure:
 ```{r}
-im4 <- plot_ly(df2_simulated, 
+cp2 <- plot_ly(df2_simulated, 
         x = ~x, 
         y = ~y, 
         z = ~z,
         marker = list(color = ~z,
                       colorscale = c('#FFE1A1', 
                                      '#683531'), 
-                      showscale = TRUE)) %>%
+                      showscale = TRUE)) |>
   add_markers()
+
 
 # This code takes a screen capture of the figure to include it in the 
 # pdf file when knitting
-htmlwidgets::saveWidget(widget = im4, 
-                        file = "im4.html")
-webshot2::webshot(url = "im4.html", 
-                  file = "im4.png", 
+htmlwidgets::saveWidget(widget = cp2, 
+                        file = "cp2.html")
+webshot2::webshot(url = "cp2.html", 
+                  file = "cp2.png", 
                   delay = 1, 
                   zoom = 4, 
                   vheight = 500)
@@ -426,7 +411,7 @@ webshot2::webshot(url = "im4.html",
 ```{r eval=FALSE}
 # This code displays the figure in the Rmd document 
 # but is not run for knitting to pdf
-im4
+cp2
 ```
 
 Imagine that you stand at the focal point with coordinates x = 53 and y = 34. Can you identify the point in the plot? If you surveyed the neighborhood, what would be the concentration of wealth there? How would that change as you visited different focal points? Lets see (again, recall that the total of the variable for the whole region is 12,034.34):
@@ -434,13 +419,10 @@ Imagine that you stand at the focal point with coordinates x = 53 and y = 34. Ca
 xy0 <- c(53, 34)
 # Select a radius
 r <- 10
-# Extract observations that are within a radius of `r` 
-# from focal point `xy0` (note that sqrt((x - xy0)^2 + (x - xy0)^2) 
-# is Pythagoras's formula for calculating the distance between 
-# two points; if this distance is less than `r`, the point is kept)
-df2_simulated %>% 
-  subset(sqrt((x - xy0[1])^2 + (y - xy0[2])^2) < r) %>%
-  select(z) %>% 
+# Extract observations that are within a radius of `r` from focal point `xy0` (note that sqrt((x - xy0)^2 + (x - xy0)^2) is Pythagoras's formula for calculating the distance between two points; if this distance is less than `r`, the point is kept)
+df2_simulated |> 
+  subset(sqrt((x - xy0[1])^2 + (y - xy0[2])^2) < r) |>
+  select(z) |> 
   sum()
 ```
 
@@ -452,12 +434,7 @@ G_i^*(d)=\frac{\sum_{j=1}^n{w_{ij}x_j}}{\sum_{i=i}^{n}x_{i}}
 $$
 
 Notice that the spatial weights are **not** row-standardized, and in fact must be a binary variable as follows:
-$$
-w_{ij}=\bigg\{\begin{array}{l l}
-1\textrm{ if } d_{ij}\leq d\\
-0\textrm{ otherwise}\\
-\end{array}
-$$
+$w_{ij} = 1$ if $d_{ij}\leq d$ and $w_{ij} = 0$ otherwise}.
 
 This is because in this measure of concentration, we do not calculate the spatial moving average for the neighborhood, but the total of the variable in the neighborhood.
 
@@ -476,8 +453,7 @@ WE will calculate this statistic for the two datasets in the example above. This
 ```{r}
 # Create a matrix of coordinates.
 xy_coord <- cbind(df1_simulated$x, df1_simulated$y)
-# Find all nearest neighbors that are within 0 and 10 units 
-# of distance away from every observation.
+# Find all nearest neighbors that are withing 0 and 10 units of distance away from every observation.
 dn10 <- dnearneigh(xy_coord, 0, 10)
 ```
 
@@ -489,8 +465,7 @@ wb10 <- nb2listw(include.self(dn10), style = "B")
 
 The local statistics can be obtained as follows:
 ```{r}
-# The arguments of this function are a spatial variable 
-# and a list of spatial weights
+# The arguments of this function are a spatial variable and a list of spatial weights
 df1.lg <- localG(df1_simulated$z, wb10)
 ```
 
@@ -522,7 +497,7 @@ df2.lg <- data.frame(Gstar = df2.lg, p.val = 2 * pnorm(abs(df2.lg), lower.tail =
 If we bind the results of the $G_i^*(d)$ analysis to the dataframe, we can plot the results for further exploration. We will classify the results by their type, in this case high and low concentrations:
 ```{r}
 df2 <- cbind(df2_simulated[,1:3],df2.lg)
-df2 <- df2 %>%
+df2 <- df2 |>
   mutate(Type = case_when(Gstar < 0 & p.val <= 0.05 ~ "Low Concentration",
                           Gstar > 0 & p.val <= 0.05 ~ "High Concentration", 
                           TRUE ~ "Not Signicant"))
@@ -530,7 +505,7 @@ df2 <- df2 %>%
 
 And then the plot, but now color the points depending on whether they are high or low concentrations, and whether their $p$-values are lower than 0.05:
 ```{r}
-im5 <- plot_ly(df2, 
+cp3 <- plot_ly(df2, 
         x = ~x,
         y = ~y, 
         z = ~z, 
@@ -538,15 +513,15 @@ im5 <- plot_ly(df2,
         colors = c("red", 
                    "blue", 
                    "gray"),
-        marker = list()) %>%
+        marker = list()) |>
   add_markers()
 
 # This code takes a screen capture of the figure to include it in the 
 # pdf file when knitting
-htmlwidgets::saveWidget(widget = im5, 
-                        file = "im5.html")
-webshot2::webshot(url = "im5.html", 
-                  file = "im5.png", 
+htmlwidgets::saveWidget(widget = cp3, 
+                        file = "cp3.html")
+webshot2::webshot(url = "cp3.html", 
+                  file = "cp3.png", 
                   delay = 1, 
                   zoom = 4, 
                   vheight = 500)
@@ -555,7 +530,7 @@ webshot2::webshot(url = "im5.html",
 ```{r eval=FALSE}
 # This code displays the figure in the Rmd document 
 # but is not run for knitting to pdf
-im5
+cp3
 ```
 
 What kind of pattern do you observe?
@@ -593,7 +568,7 @@ df2 <- mutate(df2,
                                TRUE ~ "Not Signicant"),
               factor = Type)
 
-im6 <- plot_ly(df2, 
+cp4 <- plot_ly(df2, 
         x = ~x, 
         y = ~y, 
         z = ~z, 
@@ -601,15 +576,15 @@ im6 <- plot_ly(df2,
         colors = c("red", 
                    "blue",
                    "gray"),
-        marker = list()) %>%
+        marker = list()) |>
   add_markers()
 
 # This code takes a screen capture of the figure to include it in the 
 # pdf file when knitting
-htmlwidgets::saveWidget(widget = im6, 
-                        file = "im6.html")
-webshot2::webshot(url = "im6.html", 
-                  file = "im6.png", 
+htmlwidgets::saveWidget(widget = cp4, 
+                        file = "cp4.html")
+webshot2::webshot(url = "cp4.html", 
+                  file = "cp4.png", 
                   delay = 1, 
                   zoom = 4, 
                   vheight = 500)
@@ -618,7 +593,7 @@ webshot2::webshot(url = "im6.html",
 ```{r eval=FALSE}
 # This code displays the figure in the Rmd document 
 # but is not run for knitting to pdf
-im6
+cp4
 ```
 
 You will see that fewer observations are significant, but it is still possible to detect two regions of high concentration, and two of low concentration.

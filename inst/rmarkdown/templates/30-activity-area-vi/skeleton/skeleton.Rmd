@@ -59,7 +59,7 @@ O'Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Ch
 
 ## Preliminaries
 
-It is good practice to clear the workspace to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
+Restart your `R` session or at least use the `R` command to clear the workspace, `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following. This ensures that your working space is clean to begin with:
 ```{r}
 rm(list = ls())
 ```
@@ -73,7 +73,6 @@ library(sf)
 library(spatstat)
 library(spdep)
 library(tidyverse)
-library(webshot2)
 ```
 
 Choose a data set with area data that interests you. These are two possibilities:
@@ -125,15 +124,18 @@ pennlc.sf <- st_as_sf(pennlc)
 
 ## Activity
 
+::: {.textbox data-latex=""}
 **Capstone Activity**
 
-This is a capstone activity where you can work free-style on a data set of your choice, and put in practice what you
+This is a capstone activity where you can work free-style
+on a data set of your choice, and put in practice what you
 have learned with respect to the analysis of area data.
+:::
 
 1. Partner with a fellow student to analyze the chosen dataset.
 
-2. Visualize/explore the data set using appropriate tools.
+2. Visualize and explore the dataset using appropriate tools.
 
-3. Analyze your data set by means of regression modeling. Which should be the dependent variable in your dataset? Why?
+3. Analyze your dataset by means of regression modeling. Which should be the dependent variable in your dataset? Why?
 
 4. Discuss the results of your analysis, including possible limitations, and possible ways to improve it (e.g., what additional variables would you like to use?)

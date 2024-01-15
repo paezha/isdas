@@ -24,6 +24,8 @@ knitr::opts_chunk$set(echo = TRUE,
                       out.width = "0.8\\linewidth")
 ```
 
+Previously, you learned about the analysis of area data. Starting with this practice, you will be introduced to another type of spatial data: continuous data, also called fields. 
+
 ## Learning objectives
 
 In the previous practice you were introduced to the concept of fields/spatially continuous data. Three different approaches were discussed that can be used to convert a set of observations of a field at discrete locations into a surface, namely tile-based approaches, inverse distance weighting (IDW), and $k$-point means. In this practice, you will learn:
@@ -42,7 +44,7 @@ In the previous practice you were introduced to the concept of fields/spatially 
 
 ## Preliminaries
 
-As usual, it is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in `R` to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
+As usual, it is good practice to begin with a new session of `R` or at least to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in `R` to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
 ```{r}
 rm(list = ls())
 ```
@@ -118,32 +120,26 @@ $$
 \hat{z}_p = \frac{\sum_{i=1}^n{w_{pi}z_i}}{\sum_{i=1}^n{w_{pi}}}
 $$
 
-With:
-$$
-w_{pi} = \bigg\{\begin{array}{ll}
-1 & \textrm{if } i \textrm{ is one of } kth \textrm{ nearest neighbors of } p \textrm{ for a given }k \\
-0 & otherwise \\
-\end{array}
-$$
+With $w_{pi} = 1$ if $i$ is one of $k$-th nearest neighbors of $p$ for a given $k$, and $w_{pi} = 0$ otherwise.
 
 The standard deviation could be calculated also based in the values of the $k$-nearest neighbors, meaning that it would be based on the local mean. Here, we will interpolate the field using the Walker Lake data. First create a target grid for interpolation, and extract the coordinates of observations: 
 ```{r}
 # Create a prediction grid and convert to simple features:
 target_xy = expand.grid(x = seq(0.5, 259.5, 2.2), 
-                        y = seq(0.5, 299.5, 2.2)) %>%
+                        y = seq(0.5, 299.5, 2.2)) |>
   st_as_sf(coords = c("x", "y"))
 
-# Convert the `Walker_Lake` dataframe to a simple features object:
-Walker_Lake.sf <- Walker_Lake %>% 
+# Convert the `Walker_Lake` dataframe to a simple features object using as follows:
+Walker_Lake.sf <- Walker_Lake |> 
   st_as_sf(coords = c("X", "Y"))
 ```
 
 Interpolation using $k=5$ neighbors:
-```{r cache=TRUE}
+```{r cache=FALSE}
 kpoint.5 <- kpointmean(source_xy = Walker_Lake.sf, 
                        target_xy = target_xy, 
                        z = V,  
-                       k = 5) %>%
+                       k = 5) |>
   rename(V = z)
 ```
 
@@ -180,43 +176,29 @@ We can illustrate this technique by means of a simulated example. We will begin 
 # `n` is the number of observations to simulate
 n <- 180
 
-# Here we create a dataframe with these values: `u` and `v` 
-# will be the coordinates of our process
+# Here we create a dataframe with these values: `u` and `v` will be the coordinates of our process
 df <- data.frame(u = runif(n = n, min = 0, max = 1), 
                  v = runif(n = n, min = 0, max = 1))
 ```
 
 Once we have simulated the coordinates for the example, we can plot their locations:
 ```{r}
-ggplot(data = df, aes(x = u, 
-                      y = v)) + 
+ggplot(data = df, aes(x = u, y = v)) + 
   geom_point() + 
   coord_equal()
 ```
 
 We can now proceed to simulate a spatial process as follows:
 ```{r}
-# Use `mutate()` to create a new stochastic variable `z` that is
-# a function of the coordinates and a random normal variable that 
-# we create with `rnorm()`; this random variable has a mean of zero 
-# and a standard deviation of 0.1.
+# Use `mutate()` to create a new stochastic variable `z` that is a function of the coordinates and a random normal variable that we create with `rnorm()`; this random variable has a mean of zero and a standard deviation of 0.1.
 df <- mutate(df, z = 0.5 + 0.3 * u + 0.7 * v + rnorm(n = n, mean = 0, sd = 0.1))
 ```
 
 A 3D scatterplot can be useful to explore the data:
 ```{r}
-# Create a 3D scatterplot with the function `plot_ly()`. 
-# Notice that the way this function works is similar to `ggplot2`: 
-# the arguments are a dataframe, what should be plotted on the x-axis,
-# the y-axis, the z-axis, and other aesthetics (aspects) of the plot.
-# Here the color will be proportional to the values of `z`. The function
-# `add_markers()` is similar to the family of `geom_` functions in `ggplot2`,
-# but more general, since it will try to guess what you are trying to plot 
-# based on the inputs (in this case points). The function `layout()` is 
-# used to control other parts of the plot: here the `aspectratio` is selected
-# so that the scale is identical for all three axes.
-im1 <- plot_ly(data = df, x = ~u, y = ~v, z = ~z, color = ~z) %>% 
-  add_markers() %>% 
+# Create a 3D scatterplot with the function `plot_ly()`. Notice that the way this function works is similar to `ggplot2`: the arguments are a dataframe, what should be plotted on the x-axis, the y-axis, the z-axis, and other aesthetics (aspects) of the plot. Here the color will be proportional to the values of `z`. The function `add_markers()` is similar to the family of `geom_` functions in `ggplot2`, but more general, since it will try to guess what you are trying to plot based on the inputs (in this case points). The function `layout()` is used to control other parts of the plot: here the `aspectratio` is selected so that the scale is identical for all three axes.
+im1 <- plot_ly(data = df, x = ~u, y = ~v, z = ~z, color = ~z) |> 
+  add_markers() |> 
   layout(scene = list(
     aspectmode = "manual", aspectratio = list(x=1, y=1, z=1)))
 
@@ -285,21 +267,21 @@ z.p_u <- matrix(data = preds$fit[,3], nrow = 21, ncol = 21, byrow = TRUE)
 
 The plot is created using the coordinates used for interpolation (`x.p` and `y.p`) and the matrices with the point estimates `z.p` and the upper and lower bounds. The type of plot in the package `plotly` is a _surface_:
 ```{r}
-im2 <- plot_ly(x = ~u.p, y = ~v.p, z = ~z.p, 
-        type = "surface", colors = "YlOrRd") %>% 
+trend.plot <- plot_ly(x = ~u.p, y = ~v.p, z = ~z.p, 
+        type = "surface", colors = "YlOrRd") |> 
   add_surface(x = ~u.p, y = ~v.p, z = ~z.p_l, 
-              opacity = 0.5, showscale = FALSE) %>%
+              opacity = 0.5, showscale = FALSE) |>
   add_surface(x = ~u.p, y = ~v.p, z = ~z.p_u, 
-              opacity = 0.5, showscale = FALSE) %>% 
+              opacity = 0.5, showscale = FALSE) |> 
   layout(scene = list(
     aspectmode = "manual", aspectratio = list(x = 1, y = 1, z = 1)))
 
 # This code takes a screen capture of the figure to include it in the 
 # pdf file when knitting
-htmlwidgets::saveWidget(widget = im2, 
-                        file = "im2.html")
-webshot2::webshot(url = "im2.html", 
-                  file = "im2.png", 
+htmlwidgets::saveWidget(widget = trend.plot, 
+                        file = "trend.plot.html")
+webshot2::webshot(url = "trend.plot.html", 
+                  file = "trend.plot.png", 
                   delay = 1, 
                   zoom = 4, 
                   vheight = 500)
@@ -308,7 +290,7 @@ webshot2::webshot(url = "im2.html",
 ```{r eval=FALSE}
 # This code displays the figure in the Rmd document 
 # but is not run for knitting to pdf
-im2
+trend.plot
 ```
 
 In this way, we have not only an estimate of the underlying field, but also a measure of uncertainty for our predictions, since our estimated values are bound, with 95% confidence, between the lower and upper surfaces.
@@ -397,21 +379,21 @@ z.p3_u <- matrix(data = WL.preds3$fit[,3], nrow = 119, ncol = 103, byrow = TRUE)
 
 This is the quadratic trend surface with its confidence interval of predictions:
 ```{r}
-im3 <- plot_ly(x = ~X.p, y = ~Y.p, z = ~z.p2, 
-        type = "surface", colors = "YlOrRd") %>% 
+WL.plot2 <- plot_ly(x = ~X.p, y = ~Y.p, z = ~z.p2, 
+        type = "surface", colors = "YlOrRd") |> 
   add_surface(x = ~X.p, y = ~Y.p, z = ~z.p2_l, 
-              opacity = 0.5, showscale = FALSE) %>%
+              opacity = 0.5, showscale = FALSE) |>
   add_surface(x = ~X.p, y = ~Y.p, z = ~z.p2_u, 
-              opacity = 0.5, showscale = FALSE) %>% 
+              opacity = 0.5, showscale = FALSE) |> 
   layout(scene = list(
     aspectmode = "manual", aspectratio = list(x = 1, y = 1, z = 1)))
 
 # This code takes a screen capture of the figure to include it in the 
 # pdf file when knitting
-htmlwidgets::saveWidget(widget = im3, 
-                        file = "im3.html")
-webshot2::webshot(url = "im3.html", 
-                  file = "im3.png", 
+htmlwidgets::saveWidget(widget = WL.plot2, 
+                        file = "WL.plot2.html")
+webshot2::webshot(url = "WL.plot2.html", 
+                  file = "WL.plot2.png", 
                   delay = 1, 
                   zoom = 4, 
                   vheight = 500)
@@ -420,26 +402,26 @@ webshot2::webshot(url = "im3.html",
 ```{r eval=FALSE}
 # This code displays the figure in the Rmd document 
 # but is not run for knitting to pdf
-im3
+WL.plot2
 ```
 
 And, this is the cubic trend surface with its confidence interval of predictions:
 ```{r}
-im4 <- plot_ly(x = ~X.p, y = ~Y.p, z = ~z.p3, 
-        type = "surface", colors = "YlOrRd") %>% 
+WL.plot3 <- plot_ly(x = ~X.p, y = ~Y.p, z = ~z.p3, 
+        type = "surface", colors = "YlOrRd") |> 
   add_surface(x = ~X.p, y = ~Y.p, z = ~z.p3_l, 
-              opacity = 0.5, showscale = FALSE) %>%
+              opacity = 0.5, showscale = FALSE) |>
   add_surface(x = ~X.p, y = ~Y.p, z = ~z.p3_u, 
-              opacity = 0.5, showscale = FALSE) %>% 
+              opacity = 0.5, showscale = FALSE) |> 
   layout(scene = list(
     aspectmode = "manual", aspectratio = list(x = 1, y = 1, z = 1)))
 
 # This code takes a screen capture of the figure to include it in the 
 # pdf file when knitting
-htmlwidgets::saveWidget(widget = im4, 
-                        file = "im4.html")
-webshot2::webshot(url = "im4.html", 
-                  file = "im4.png", 
+htmlwidgets::saveWidget(widget = WL.plot3, 
+                        file = "WL.plot3.html")
+webshot2::webshot(url = "WL.plot3.html", 
+                  file = "WL.plot3.png", 
                   delay = 1, 
                   zoom = 4, 
                   vheight = 500)
@@ -448,23 +430,24 @@ webshot2::webshot(url = "im4.html",
 ```{r eval=FALSE}
 # This code displays the figure in the Rmd document 
 # but is not run for knitting to pdf
-im4
+WL.plot3
 ```
 
 Alas, these models are not very reliable estimates of the underlying field. As can be seen from the plots, the confidence intervals are extremely wide, and in both cases include negative numbers in the lower bound. The uncertainty associated with these predictions is quite substantial.
 
 Another question, however, is whether the point estimates are accurate. To get a sense of whether this is the case we can add the observations to the plot:
 ```{r}
-im5 <- im4 %>%
+WL.plot4 <- WL.plot3 |>
   add_markers(data = Walker_Lake, x = ~X, y = ~Y, z = ~V, 
               color = ~V, opacity = 0.7, showlegend = FALSE)
 
+
 # This code takes a screen capture of the figure to include it in the 
 # pdf file when knitting
-htmlwidgets::saveWidget(widget = im5, 
-                        file = "im5.html")
-webshot2::webshot(url = "im5.html", 
-                  file = "im5.png", 
+htmlwidgets::saveWidget(widget = WL.plot4, 
+                        file = "WL.plot4.html")
+webshot2::webshot(url = "WL.plot4.html", 
+                  file = "WL.plot4.png", 
                   delay = 1, 
                   zoom = 4, 
                   vheight = 500)
@@ -473,23 +456,20 @@ webshot2::webshot(url = "im5.html",
 ```{r eval=FALSE}
 # This code displays the figure in the Rmd document 
 # but is not run for knitting to pdf
-im5
+WL.plot4
 ```
 
 Alas, the trend surface does a mediocre job with the point estimates as well.
 
 A possible reason for this is that the model failed to capture all or even most of the systematic spatial variability of this field. To explore this, we will plot the residuals of the model, after labeling them as "positive" or "negative":
 ```{r}
-Walker_Lake$residual3 <- ifelse(WL.trend3$residuals > 0, 
-                                "Positive", 
-                                "Negative")
+Walker_Lake$residual3 <- ifelse(WL.trend3$residuals > 0, "Positive", "Negative")
 ```
 
 Plot the residuals:
 ```{r}
 ggplot(data = Walker_Lake, 
-       aes(x = X, y = Y, 
-           color = residual3)) +
+       aes(x = X, y = Y, color = residual3)) +
   geom_point() +
   coord_equal()
 ```
@@ -497,17 +477,16 @@ ggplot(data = Walker_Lake,
 Visual inspection of the distribution of the residuals strongly suggests that they are not random. We can check this by means of Moran's $I$ coefficient, if we create a list of spatial weights as follows:
 ```{r}
 # Create a set of spatial weights with the 5 nearest neighbors.
-WL.listw <- Walker_Lake[,2:3] %>% 
-  as.matrix() %>%
-  knearneigh(k = 5) %>%
-  knn2nb() %>%
+WL.listw <- Walker_Lake[,2:3] |> 
+  as.matrix() |>
+  knearneigh(k = 5) |>
+  knn2nb() |>
   nb2listw()
 ```
 
 The results of the autocorrelation analysis of the residuals are:
 ```{r}
-moran.test(x = WL.trend3$residuals, 
-           listw = WL.listw)
+moran.test(x = WL.trend3$residuals, listw = WL.listw)
 ```
 
 Given the low $p$-value, we fail to reject the null hypothesis, and conclude, with a high level of confidence, that the residuals are not independent. This has important implications for spatial interpolation, as we will discuss in the following chapter.

@@ -60,7 +60,7 @@ O'Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Ch
 
 ## Preliminaries
 
-It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
+To start with a clean session restart the application or enter `command/ctrl + shift + F10`. A weaker alternative to this is to _only_ purge user-created objects from memory with the `R` command `rm` (for "remove"), followed by a list of items to be removed. This way at least the working space is clear of extraneous items when you begin your work:
 ```{r}
 rm(list = ls())
 ```
@@ -88,7 +88,7 @@ This is an `sf` object with census tracts and selected demographic variables for
 
 You can obtain new (calculated) variables as follows. For instance, to obtain the proportion of residents who are between 20 and 34 years old, and between 35 and 49:
 ```{r}
-Hamilton_CT <- Hamilton_CT %>%
+Hamilton_CT <- Hamilton_CT |>
   mutate(Prop20to34 = (AGE_20_TO_24 + 
                          AGE_25_TO_29 + 
                          AGE_30_TO_34)/POPULATION, 
@@ -101,14 +101,19 @@ You are ready for the next activity.
 
 ## Activity
 
-**NOTE**: Activities include technical "how to" tasks/questions (indicated with *). Usually, these ask you to practice using the software to organize data, create plots, and so on in support of analysis and interpretation. The second type of questions ask you to activate your brainware and to think geographically and statistically.
+**NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to practice using the software to organize data, create plots, and so on in support of analysis and interpretation. The second type of questions ask you to activate your brainware and to think geographically and statistically.
 
-1. (*) Create choropleth maps for the proportion of the population who are 20 to 34 years old, 35 to 49 years old, 50 to 65 years old, and 65 and older.
+**Activity Part I**
 
-2. (*) Create cartograms for the proportion of the population who are 20 to 34 years old, 35 to 49 years old, 50 to 65 years old, and 65 and older.
+1. Create choropleth maps for the proportion of the population who are 20 to 34 years old, 35 to 49 years old, 50 to 65 years old, and 65 and older.
 
-3. (*) Change the scheme and colors of your maps to obtain maps with 2 classes/colors, 5 classes/colors, and 10 classes/colors. You can check different color palettes [in the documentation of {ggplot2}](https://ggplot2.tidyverse.org/reference/scale_brewer.html). Which scheme is more informative? What colors looked better to you?
+2. Create cartograms for the proportion of the population who are 20 to 34 years old, 35 to 49 years old, 50 to 65 years old, and 65 and older.
+
+3. Choose one of the maps you made in Question 1 or Question 2 and prepare to change the scheme and colors of this map to obtain 3 new maps. One map should have 2 classes/colors, another should have 5 classes/colors, and another should have 10 classes/colors. You can check different color palettes [in the documentation of {ggplot2}](https://ggplot2.tidyverse.org/reference/scale_brewer.html). Which scheme is more informative? What colors looked better to you?
+
+**Activity Part II**
 
 4. Show your maps to a fellow student. What patterns do you notice in the distribution of population by age in Hamilton? Do you think the distribution of the population by age is random, or not random?
 
-5. Devise a rule to decide whether the pattern observed in a choropleth map is random.
+5. Devise a rule or a type of benchmark you could use to decide whether the pattern observed in a choropleth map is random. Discuss how this rule/benchmark would work. 
+

@@ -63,7 +63,7 @@ In this activity, you will:
 
 ## Preliminaries
 
-It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
+Restart `R` to begin work with a new session, or at least clear the working space to ensure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
 ```{r}
 rm(list = ls())
 ```
@@ -76,6 +76,7 @@ library(isdas)
 library(gstat)
 library(sf)
 library(tidyverse)
+library(stars)
 ```
 
 Load dataset:
@@ -91,18 +92,23 @@ The data set consists of 85 georeferenced measurements of piezometric head. Poss
 
 Convert to a `SpatialPointsDataFrame`:
 ```{r}
-aquifer.sf <- aquifer %>%
+aquifer.sf <- aquifer |>
   st_as_sf(coords = c("X", "Y"),
            remove = FALSE)
 ```
 
 ## Activity
 
+::: {.textbox data-latex=""}
 **Capstone Activity**
 
-This is a capstone activity where you can work free-style on a data set of your choice, and put in practice what you have learned with respect to the analysis of spatially continuous/field data.
+This is a capstone activity where you can work free-style
+on a data set of your choice, and put in practice what you
+have learned with respect to the analysis of spatially continuous/
+field data.
+:::
 
-1. Partner with a fellow student to analyze the data set provided.
+1. Partner with a fellow student to analyze the dataset provided.
 
 2. Use kriging to interpolate the underlying field. Justify your modeling choices.
 

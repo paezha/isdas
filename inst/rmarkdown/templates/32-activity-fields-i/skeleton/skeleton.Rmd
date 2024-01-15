@@ -65,7 +65,7 @@ In this activity, you will:
 
 ## Preliminaries
 
-It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
+Remember to begin your work with a clean session. At least, you need to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in `R` to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
 ```{r}
 rm(list = ls())
 ```
@@ -78,6 +78,7 @@ library(isdas)
 library(tidyverse)
 library(spatstat)
 library(spdep)
+library(plotly)
 ```
 
 Load the data that you will use in this activity:
@@ -98,15 +99,19 @@ aquifer$ID <- factor(c(1:nrow(aquifer)))
 
 ## Activity
 
-**NOTE**: Activities include technical "how to" tasks/questions (indicated with *). Usually, these ask you to practice using the software to organize data, create plots, and so on in support of analysis and interpretation. The second type of questions ask you to activate your brainware and to think geographically and statistically.
+**NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to practice using the software to organize data, create plots, and so on in support of analysis and interpretation. The second type of questions ask you to activate your brainware and to think geographically and statistically.
 
-1. (*) Map the Wolfcamp Aquifer data.
+**Activity Part I**
 
-2. (*) Create a surface using Voronoi polygons.
+1. Map the Wolfcamp Aquifer data.
 
-3. (*) Create a surface using IDW.
+2. Create a surface using Voronoi polygons.
 
-4. (*) Create a surface using $k$-point means. 
+3. Create a surface using IDW.
+
+4. Create a surface using $k$-point means. 
+
+**Activity Part II**
 
 5. What is the effect of changing the power of the inverse distance function?
 

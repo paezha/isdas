@@ -59,7 +59,7 @@ O'Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Ch
 
 ## Preliminaries
 
-It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
+it is good practice to begin with a clean session to make sure that you do not have extraneous items there when you begin your work. The best practice is to restart the `R` session, which can be accomplished for example with `command/ctrl + shift + F10`. An alternative to _only_ purge user-created objects from memory is to use the `R` command `rm` (for "remove"), followed by a list of items to be removed:
 ```{r}
 rm(list = ls())
 ```
@@ -68,8 +68,8 @@ Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity:
 ```{r message=FALSE}
-library(tidyverse)
-library(isdas)
+library(tidyverse) # Easily Install and Load the 'Tidyverse'
+library(isdas) # Companion Package for Book An Introduction to Spatial Data Analysis and Statistics
 ```
 
 Now that your workspace is clear, you can proceed to invoke the datasets required for this activity:
@@ -96,11 +96,15 @@ The dataframes `PointPattern*` are locations of some generic events. The coordin
 
 ## Activity
 
-**NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
+**NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to practice using the software to organize data, create plots, and so on in support of analysis and interpretation. The second type of questions ask you to activate your brainware and to think geographically and statistically.
 
-1. (*)Create thematic maps for variables VAR1 through VAR3 in the dataframe `missing_df`. 
+**Activity Part I**
 
-2. (*)Plot all three point patterns.
+1. Create thematic maps for variables VAR1 through VAR3 in the dataframe `missing_df`. 
+
+2. Plot all three point patterns.
+
+**Activity Part II**
 
 3. Suppose that you were tasked with estimating the value of a variable for the locations where those were not measured. For instance, you could be a realtor, and you need to assess the value of a property, and the only information available is the published values of other properties in the region. As an alternative, you could be an environmental scientist, and you need to estimate what the concentration of a contaminant at a site, based on previous measurements at other sites in the region. Propose one or more ways to guess those missing values, and explain your reasoning. The approach does not need to be the same for all variables!
 
