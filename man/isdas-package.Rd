@@ -7,13 +7,12 @@
 \title{isdas: Companion Package for Book An Introduction to Spatial Data Analysis and Statistics}
 \description{
 This package contains data sets, custom functions, and document templates to work with the book An Introduction to Spatial Data Analysis and Statistics: A Course in R.
-
-A package with data sets and functions used in the book \emph{An Introduction to Spatial Data Analysis and Statistics: A Course in} \code{R}.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/paezha/isdas}
+  \item \url{https://paezha.github.io/isdas/ https://paezha.github.io/spatial-analysis-with-r/}
   \item \url{https://paezha.github.io/isdas/}
   \item Report bugs at \url{https://github.com/paezha/isdas/issues}
 }
@@ -28,7 +27,5 @@ Authors:
   \item Anastassios Dardas
 }
 
-
-Antonio Paez, School of Earth, Environment and Society, McMaster University \email{paezha@mcmaster.ca}
 }
 \keyword{internal}

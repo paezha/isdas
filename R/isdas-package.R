@@ -5,17 +5,6 @@
 ## usethis namespace: end
 NULL
 
-#' isdas
-#'
-#' A package with data sets and functions used in the book _An Introduction to Spatial Data Analysis and Statistics: A Course in_ \code{R}.
-#'
-#' @author Antonio Paez, School of Earth, Environment and Society, McMaster University \email{paezha@@mcmaster.ca}
-#' @name isdas-package
-#' @docType package
-#' @import deldir dplyr plotly sp spdep stats
-#'
-NULL
-
 #' John Snow's London 1854 cholera outbreak deaths
 #'
 #' A dataset containing the location and number of cholera deaths in Soho, London.
