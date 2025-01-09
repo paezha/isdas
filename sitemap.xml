@@ -1,114 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://paezha.github.io/isdas/404.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/index.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/Fast_Food.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/Gas_Stands.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/HamiltonDAs.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/Hamilton_CT.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/Paez_Mart.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/PointPattern1.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/PointPattern2.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/PointPattern3.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/PointPatterns.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/Toronto.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/Walker_Lake.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/aquifer.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/bear_df.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/df1_simulated.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/df2_simulated.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/isdas-package.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/kpointmean.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/localmoran.map.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/missing_df.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/nyleukemia.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/pennlc.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/pp0_df.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/pp1_df.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/pp2_df.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/pp3_df.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/pp4_df.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/pp5_df.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/snow_deaths.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/snow_pumps.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/travel_time_car.html</loc>
-  </url>
-  <url>
-    <loc>https://paezha.github.io/isdas/reference/trips_by_mode.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://paezha.github.io/isdas/404.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/LICENSE-text.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/LICENSE.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/authors.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/index.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/Fast_Food.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/Gas_Stands.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/HamiltonDAs.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/Hamilton_CT.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/Paez_Mart.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/PointPattern1.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/PointPattern2.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/PointPattern3.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/PointPatterns.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/Toronto.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/Walker_Lake.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/aquifer.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/bear_df.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/df1_simulated.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/df2_simulated.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/index.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/isdas-package.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/kpointmean.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/localmoran.map.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/missing_df.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/nyleukemia.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/pennlc.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/pp0_df.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/pp1_df.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/pp2_df.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/pp3_df.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/pp4_df.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/pp5_df.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/snow_deaths.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/snow_pumps.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/travel_time_car.html</loc></url>
+<url><loc>https://paezha.github.io/isdas/reference/trips_by_mode.html</loc></url>
 </urlset>
+
