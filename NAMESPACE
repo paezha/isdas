@@ -2,10 +2,5 @@
 
 export(kpointmean)
 export(localmoran.map)
-import(deldir)
 import(dplyr)
-import(plotly)
-import(sp)
-import(spdep)
-import(stats)
 importFrom(rlang,.data)

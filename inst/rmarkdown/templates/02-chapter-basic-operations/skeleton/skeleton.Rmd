@@ -392,43 +392,43 @@ library(webshot2) # Take Screenshots of Web Pages
 ```
 
 ```{r ch02-visualization-example-4-capture, include=FALSE}
-webshot("https://mastodon.online/deck/@terence@fosstodon.org/111404498052039281", 
+webshot("https://fosstodon.org/@terence/113552305571807412", 
         file = "02-Figure-4.png",
         selector = "div.detailed-status")
 ```
 
-```{r ch02-visualization-example-4, fig.cap= "\\label{fig:visualization-example-4} Example of visualization: Income inequality in the US", echo=FALSE}
+```{r ch02-visualization-example-4, fig.cap= "\\label{fig:visualization-example-4} Example of visualization: Forest cover in New Zealand", echo=FALSE}
 
 knitr::include_graphics("02-Figure-4.png")
 ```
 
 ```{r ch02-visualization-example-5-capture, include=FALSE}
-webshot("https://mastodon.online/deck/@terence@fosstodon.org/111652744513157011", 
+webshot("https://fosstodon.org/@terence/113532331091043008", 
         file = "02-Figure-5.png",
         selector = "div.detailed-status")
 ```
 
-```{r ch02-visualization-example-5, fig.cap= "\\label{fig:visualization-example-5} Example of visualization: Types of forests in Brazil", echo=FALSE}
+```{r ch02-visualization-example-5, fig.cap= "\\label{fig:visualization-example-5} Example of visualization: Where the turtles are", echo=FALSE}
 knitr::include_graphics("02-Figure-5.png")
 ```
 
 ```{r ch02-visualization-example-6-capture, include=FALSE}
-webshot("https://mastodon.online/deck/@terence@fosstodon.org/111575222127539953", 
+webshot("https://fosstodon.org/@terence/113506972798983101", 
         file = "02-Figure-6.png",
         selector = "div.detailed-status")
 ```
 
-```{r ch02-visualization-example-6, fig.cap= "\\label{fig:visualization-example-6} Example of visualization: Earthquakes in California", echo=FALSE}
+```{r ch02-visualization-example-6, fig.cap= "\\label{fig:visualization-example-6} Example of visualization: Earthquakes depths in Japan", echo=FALSE}
 knitr::include_graphics("02-Figure-6.png")
 ```
 
 ```{r ch02-visualization-example-7-capture, include=FALSE}
-webshot("https://mastodon.online/deck/@terence@fosstodon.org/111450552351044906", 
+webshot("https://fosstodon.org/@terence/113492777215349272", 
         file = "02-Figure-7.png",
         selector = "div.detailed-status")
 ```
 
-```{r ch02-visualization-example-7, fig.cap= "\\label{fig:visualization-example-7} Example of visualization: Population change in Japan", echo=FALSE}
+```{r ch02-visualization-example-7, fig.cap= "\\label{fig:visualization-example-7} Example of visualization: Temperature and precipitation in Brazil", echo=FALSE}
 knitr::include_graphics("02-Figure-7.png")
 ```
 
