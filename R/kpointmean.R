@@ -24,7 +24,7 @@ kpointmean <- function(source_xy, target_xy, z, k, longlat = FALSE){
   m <- dplyr::group_by(m,
                 .data$intid) %>%
     dplyr::summarize(z = mean({{z}}),
-              sd = sd({{z}}))
+              sd = stats::sd({{z}}))
 
   m
 }

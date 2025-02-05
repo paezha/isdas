@@ -26,20 +26,20 @@ localmoran.map <- function(p = p, listw = listw, VAR = VAR, by = by){
 
   Z <- SMA <- NULL
 
-  df_msc <- transmute(p,
+  df_msc <- dplyr::transmute(p,
                       key = p[[by]],
-                      Z = (p[[VAR]] - mean(p[[VAR]])) / var(p[[VAR]]),
-                      SMA = lag.listw(listw, Z),
+                      Z = (p[[VAR]] - mean(p[[VAR]])) / stats::var(p[[VAR]]),
+                      SMA = spdep::lag.listw(listw, Z),
                       Type = factor(ifelse(Z < 0 & SMA < 0, "LL",
                                            ifelse(Z > 0 & SMA > 0, "HH", "HL/LH"))))
 
-  local_I <- localmoran(p[[VAR]], listw)
+  local_I <- spdep::localmoran(p[[VAR]], listw)
   colnames(local_I) <- c("Ii", "E", "Var", "Z", "p.val")
 
 
   df_msc <- dplyr::left_join(df_msc,
                       data.frame(key = p[[by]], local_I))
 
-  plot_ly(df_msc) %>%
-    add_sf(split = ~(p.val < 0.05), color = ~Type, colors = c("red", "khaki1", "dodgerblue", "dodgerblue4"))
+  plotly::plot_ly(df_msc) |>
+    plotly::add_sf(split = ~(p.val < 0.05), color = ~Type, colors = c("red", "khaki1", "dodgerblue", "dodgerblue4"))
 }

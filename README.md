@@ -15,17 +15,17 @@ R](https://paezha.github.io/spatial-analysis-r/). As an open educational
 resource, it aims to combine various advantages of working with the [`R`
 statistical computing project](https://www.r-project.org/):
 
--   Ease of distribution
--   Reproducibility
--   Availability of templates for computational notebooks
--   Rigor in documentation of data sets and computational products
+- Ease of distribution
+- Reproducibility
+- Availability of templates for computational notebooks
+- Rigor in documentation of data sets and computational products
 
 The package includes the following components:
 
--   Document templates with *Chapters*.
--   Document templates with *Activities*.
--   Data sets used in the Chapters and Activities.
--   Custom functions.
+- Document templates with *Chapters*.
+- Document templates with *Activities*.
+- Data sets used in the Chapters and Activities.
+- Custom functions.
 
 The *Chapters* and *Activities* replicate the contents of the book, but
 what sets them appart from a conventional book is that they are
