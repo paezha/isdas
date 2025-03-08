@@ -173,39 +173,37 @@ tinytex:::is_tinytex()
 
 ## Recommended Workflow
 
-After installing the course package, this is the recommended workflow
+After installing the course package `isdas`, `tinytex`, and  `rmarkdown`, this is the recommended workflow
 for using it in this course.
 
-### Create a project for all your work in this course.
+### Restore the course book's lockfile
 
-Follow the steps below to create a new project. A project is the best
-way to keep your work in this course nicely organized.
+Download the code from the library located [here](https://github.com/paezha/Applied-Spatial-Statistics) as a .zip file as shown in Figure 2. 
+<img src="man/figures/01renv-dl-zip.gif" width="100%" /> **Figure 2.**
 
-You can create a new project using the buttons in the toolbar. Figure 2
-shows one way of doing this:
-<img src="man/figures/03-create-a-project-1.gif" width="100%" />
-**Figure 2.** *Create new project - option 1*
+Within this library is a lockfile that captures the state of the course book's library (located [here](https://github.com/paezha/spatial-analysis-r)) as of December 2022. The lockfile helps to create a reproducible environment so everyone in the course is using the same dependencies. More specifically, the lockfile captures the state of the spatial-analysis-r library at the time the lockfile was created. The lock file is a collection of records defining:
+- The version of R used in the spatial-analysis-r library;
+- The R repositories that were active in the spatial-analysis-r library when the lockfile was created; and
+- Package records defining each R package, their version, and their installation source in the spatial-analysis-r library.
 
-Figure 3 shows an alternative way of doing the same, using the button
-for managing projects in the R Studio interface:
-<img src="man/figures/04-create-a-project-2.gif" width="100%" />
-**Figure 3.** *Create new project - option 2*
+Unzip the folder and open the .Rproj file as shown in Figure 3.
+<img src="man/figures/02renv-unzip-open.gif" width="100%" /> **Figure 3.**
 
-You then need to select a new directory to store your new project. Give
-the new directory a name, and save it in a place that you can easily
-find (for instance, the folder where you keep your academic work).
-Figure 4 illustrates the steps to do this:
-<img src="man/figures/05-choose-directory-for-project.gif" width="100%" />
-**Figure 4.** *Choose to store the project in a new directory*
+After opening the .Rproj file, you'll recieve the following messages in the console:
+* The project library is out of sync with the lockfile.
+* Use `renv::restore()` to install packages recorded in the lockfile.
 
-After you click ‘Create Project’, you will have an `R` session with your
-new project. A project is a great way to keep all your files nicely
-organized.
+To restore the lockfile in your local environment, run the following command as shown in Figure 4.
+
+``` r
+renv::restore() 
+```
+<img src="man/figures/03renv-runrestore.gif" width="100%" /> **Figure 4.**
 
 ### Working with book chapters
 
-You need to restart R Studio once after installing the package before
-you can access the templates with the book chapters and activities.
+You need to restart RStudio after restoring the lockfile before
+you can access the templates with the book chapters and activities. Restart RStudio by closing the application and re-opening up the .Rproj file.
 
 After doing so, you will find that all the chapters in the book are
 included in the package (instead of asking you to buy a book, we will
@@ -217,7 +215,7 @@ you will need to create a new file from a template. You can do this from
 the button for new files in the toolbar or from the drop-down menu for
 File, see below.
 <img src="man/figures/06-create-chapter-from-template-1.gif" width="100%" />
-**Figure 6.** *Creating a new file from a template using the button in
+**Figure 5.** *Creating a new file from a template using the button in
 the toolbar*
 
 As an alternative, you can create a new file using the drop-down menu.
@@ -231,9 +229,9 @@ where this file is located. Any other files that are placed there when
 you create the chapter from a template are *required*, so do *not*
 delete them.
 
-This process is illustrated in Figure 7.
+This process is illustrated in Figure 6.
 <img src="man/figures/07-create-chapter-from-template-2.gif" width="100%" />
-**Figure 7.** *Creating a new file from a template using the drop-down
+**Figure 6.** *Creating a new file from a template using the drop-down
 menu*
 
 Your new file is an R Markdown document. This is a text file with
@@ -284,23 +282,23 @@ template. For the first activity, you would select the template for
 `04-Activity-Statistical-Maps`. Figure 10 illustrates the steps. Again,
 you can give the file any name you want, but it makes sense to name them
 logically. Once you click ‘OK’ a new R Markdown file will appear in your
-editor, as well as a new folder where this file resides (see Figure 11).
+editor, as well as a new folder where this file resides (see Figure 10).
 <img src="man/figures/11-creating-activity-from-template.gif" width="100%" />
-**Figure 11.** *Creating a new file to work on an activity*
+**Figure 10.** *Creating a new file to work on an activity*
 
 To begin, you can edit the header of the document with your personal
 information, like name and student number (see Figure 11). You can also
 run chunks of code. And importantly, to work on your exercise, you can
 enter your answers as text and create new chunks of code to do any
-calculations you need for your answers, as shown in Figure 12.
+calculations you need for your answers, as shown in Figure 11.
 <img src="man/figures/12-working-with-activity.gif" width="100%" />
-**Figure 12.** *Working on an activity*
+**Figure 11.** *Working on an activity*
 
 After you complete your activity you can knit the document to generate
 the pdf file for saving/submission/sharing. Click the Knit button in the
-top left corner to knit (see Figure 13).
+top left corner to knit (see Figure 12).
 <img src="man/figures/13-knitting-activity.gif" width="100%" /> **Figure
-13.** *Knitting the activity*
+12.** *Knitting the activity*
 
 This is the knitted activity:
 <img src="man/figures/14-knitted-activity.png" width="100%" /> **Figure
@@ -308,3 +306,29 @@ This is the knitted activity:
 
 If you are using this as part of a course, make sure to check the course
 outline for instructions about how and when to submit.
+
+### When the time comes, create a project for all your course project in this course
+
+Follow the steps below to create a new project. Creating a folder, and storng the project file within it (by the same name) is the best
+way to keep your work in this course nicely organized. The folder containing the profile file "Applied-Spatial-Statistics" can be used to store the .Rmd templates as you progress through the course. When the time comes, another folder containing a project file can be created for the course project. RStudio projects make it simpler to divide your work into multiple concepts, each with their own working directory (i.e., all RStudio outputs will be stored in the project folder and inputs can be retrieved from the project folder) and workspace (where user-defined objects are stored).
+
+You can create a new project using the buttons in the toolbar. Figure 14
+shows one way of doing this:
+<img src="man/figures/03-create-a-project-1.gif" width="100%" />
+**Figure 14.** *Create new project - option 1*
+
+Figure 15 shows an alternative way of doing the same, using the button
+for managing projects in the R Studio interface:
+<img src="man/figures/04-create-a-project-2.gif" width="100%" />
+**Figure 15.** *Create new project - option 2*
+
+You then need to select a new directory to store your new project. Give
+the new directory a name, and save it in a place that you can easily
+find (for instance, the folder where you keep your academic work).
+Figure 16 illustrates the steps to do this:
+<img src="man/figures/05-choose-directory-for-project.gif" width="100%" />
+**Figure 16.** *Choose to store the project in a new directory*
+
+After you click ‘Create Project’, you will have an `R` session with your
+new project. A project is a great way to keep all your files nicely
+organized.
